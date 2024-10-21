@@ -1,0 +1,26 @@
+﻿@model IEnumerable<DoAn.Models.Product>
+
+@{
+    ViewData["Title"] = "Trang Chủ";
+}
+
+<div class="container">
+    <h1>Trang Chủ</h1>
+
+    <p>@ViewData["DbConnectionStatus"]</p> <!-- Hiển thị trạng thái kết nối cơ sở dữ liệu -->
+
+    <h2>Danh Mục Sản Phẩm</h2>
+    @if (Model != null && Model.Any())
+    {
+        <ul>
+            @foreach (var product in Model)
+            {
+                <li>@product.ProductId - @product.ProductName</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Không có sản phẩm nào.</p> <!-- Hiển thị khi không có sản phẩm hoặc kết nối thất bại -->
+    }
+</div>

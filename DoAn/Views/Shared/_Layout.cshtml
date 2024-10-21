@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nội Thất Cao Cấp</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header id="header">
+        <div class="topbar">
+            <p>Hotline Mua Hàng: <a href="tel:0999999999">0999 999 999</a> | Hotline CSKH: <b>0999 999 999</b> | Email CSKH: <b>gonoithat@gmail.vn</b></p>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <form action="/tim-kiem" method="get" class="form-inline">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="keyword" placeholder="Tìm kiếm" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit">
+                                    <img src="~/" alt="Tìm kiếm" />
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-12 col-md-4 text-center">
+                    <h1 style="font-size: 2rem; font-weight: bold;">NOITHAT.VN</h1>
+                </div>
+                <div class="col-xs-12 col-md-4 text-right">
+                    <button id="btn_account" class="btn btn-primary">Đăng Nhập</button>
+                    <button id="btn_cart" class="btn btn-secondary">
+                        <a href="/gio-hang">
+                            <img src="~/Content/client/assets/img/shopping.png" alt="Giỏ hàng" />
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav id="mainmenu" class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="/Home/Index">Trang chủ</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdown_category" data-toggle="dropdown">Danh Mục</a>
+                        <div class="dropdown-menu">
+                            @{
+                                // Html.RenderAction("Menu", "CategoryProduct");
+                            }
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/Product/ShowProduct/">Sản phẩm</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Product/Hots">Hot nhất</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Product/Sales">Khuyến mãi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Contact/Contacts">Liên hệ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div id="home">
+        <div class="container">
+            <section id="featured">
+                <div class="slider">
+                    <img class="slider" src="~/Data/slide1.jpg" alt="Slide 1" />
+                    <img class="slider" src="~/Data/slide2.jpg" alt="Slide 2" style="display:none;" />
+                    <img class="slider" src="~/Data/slide3.jpg" alt="Slide 3" style="display:none;" />
+                    <img class="slider" src="~/Data/slide4.jpg" alt="Slide 4" style="display:none;" />
+                    <a href="#" id="prev"><img src="~/Data/Previous-icon.png" alt="Previous" /></a>
+                    <a href="#" id="next"><img src="~/Data/Next-2-2-icon.png" alt="Next" /></a>
+                </div>
+                <div class="banner clearfix">
+                    <div class="col-xs-12 col-sm-6">
+                        <img src="~/images/banner1.png" alt="Banner 1" />
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <img src="~/images/banner2.png" alt="Banner 2" />
+                    </div>
+                </div>
+            </section>
+
+            <section id="main" class="row">
+                <div id="left" class="col-xs-12 col-sm-4 col-md-3">
+                    <div class="boxleft">
+                        <div class="titboxl"><span>Mức Giá</span></div>
+                        <div class="ctboxleft">
+                            <form action="/Product/SearchFocus" method="get">
+                                <div>
+                                    <input type="checkbox" name="check0" value="true"> Dưới 5 Triệu<br>
+                                    <input type="checkbox" name="check1" value="true"> 5 Triệu - 10 Triệu<br>
+                                    <input type="checkbox" name="check2" value="true"> 10 Triệu - 20 Triệu<br>
+                                    <input type="checkbox" name="check3" value="true"> 20 Triệu - 50 Triệu<br>
+                                    <input type="checkbox" name="check4" value="true"> Trên 50 Triệu<br>
+                                    <input type="submit" class="btn btn-secondary" value="Xem" style="width: 100%" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="boxleft">
+                        @* @Html.Action("ProductHot", "Product") *@
+                    </div>
+                    <div class="boxleft">
+                        <div class="titboxl"><span>Tin tức</span></div>
+                        <div class="ctboxleft">
+                            <div id="slider-tintuc" class="owl-carousel">
+                                @* @Html.Action("NewsHot", "News") *@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="maincontent" class="col-xs-12 col-sm-8 col-md-9">
+                    @RenderSection("Noidungbenphai", required: false)
+                    @RenderSection("Noidungmenu", required: false)
+                    @RenderBody()
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3">
+                    <h3><span>Studio Nội Thất</span></h3>
+                    <p><span>Đẹp - Sang Trọng - Tinh tế</span></p>
+                </div>
+                <div class="col-xs-12 col-sm-2">
+                    <h3><span>Về chúng tôi</span></h3>
+                    <ul>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Chính sách & Quy định</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-2">
+                    <h3><span>Liên hệ</span></h3>
+                    <ul>
+                        <li><a href="#">Địa chỉ</a></li>
+                        <li><a href="#">Số điện thoại</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
