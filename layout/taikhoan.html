@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .header {
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+        }
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header .nav-item {
+            margin-right: 20px;
+        }
+        .header .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .header .search-bar input {
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .header .icons i {
+            font-size: 18px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+    
+
+        .breadcrumb{
+            width: 70%;
+            margin: 10px auto;
+        }
+        .breadcrumb a{
+            text-decoration: none;
+        }
+        .account-management {
+    display: flex;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 30%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.sidebar h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.menu li:hover {
+    background-color: #e0e0e0;
+}
+
+.content {
+    width: 70%;
+    padding: 20px;
+}
+
+.content-section {
+    display: none; /* Initially hide all sections */
+}
+
+.content-section h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.content-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.content-section table, .content-section th, .content-section td {
+    border: 1px solid #ddd;
+}
+
+.content-section th, .content-section td {
+    padding: 10px;
+    text-align: left;
+}
+
+.change-password-button, .add-address-button {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.change-password-button:hover, .add-address-button:hover {
+    background-color: #f7bd96;
+}
+label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block; /* Đảm bảo nhãn đứng trên trường nhập liệu */
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px; /* Khoảng cách giữa các trường nhập liệu */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển đổi */
+}
+
+input[type="password"]:focus {
+    border-color: #ff6600; /* Đổi màu viền khi trường được chọn */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Hiệu ứng bóng mờ */
+    outline: none; /* Bỏ viền mặc định khi được chọn */
+}
+
+.change-password-button {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s; /* Hiệu ứng chuyển đổi */
+}
+
+.change-password-button:hover {
+    background-color: #f7bd96; /* Đổi màu khi di chuột qua */
+}
+.add-address-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.add-address-form h3 {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"],
+input[type="tel"],
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+select:focus {
+    border-color: #ff6600;
+    outline: none;
+}
+
+.checkbox-container {
+    margin-bottom: 15px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cancel-button,
+.add-button {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cancel-button:hover,
+.add-button:hover {
+    background-color: #f7bd96;
+}
+.account-management {
+            display: flex;
+            width: 100%;
+        }
+        .sidebar {
+            width: 20%;
+            padding: 10px;
+        }
+        .content {
+            width: 80%;
+            padding: 10px;
+        }
+        .menu li {
+            cursor: pointer;
+            list-style: none;
+            padding: 5px;
+        }
+        .menu li:hover {
+            background-color: #ddd;
+        }
+        .content-section {
+            margin-top: 10px;
+        }
+        .add-address-button {
+            margin-top: 10px;
+        }
+        /* CSS cho modal */
+        .modal {
+            display: none; /* Ẩn mặc định */
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0, 0, 0, 0.5); /* Màu nền trong suốt */
+        }
+        .modal-content {
+            background-color: #f9f9f9;
+            margin: 15% auto; /* 15% từ trên và căn giữa */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Chiều rộng của modal */
+            max-width: 600px; /* Chiều rộng tối đa */
+        }
+        .form-actions {
+            margin-top: 10px;
+        }
+
+    
+        /* footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+        }
+        .footer .footer-logo,
+        .footer .footer-support,
+        .footer .footer-policy,
+        .footer .footer-subscribe {
+            margin-bottom: 20px;
+        }
+        .footer h5 {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .footer p, .footer a {
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        .footer a:hover {
+            color: #f7bd96;
+            text-decoration: none;
+        }
+        .footer .footer-subscribe input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .footer .social-icons a {
+            color: #bbb;
+            font-size: 1.2rem;
+            margin-right: 10px;
+            transition: color 0.3s;
+        }
+        .footer .social-icons a:hover {
+            color: #f7bd96;
+        }
+        .footer .payment-methods img {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+    </style>
+    
+</head>
+<body>
+<header>
+<div class="header d-flex justify-content-between align-items-center">
+    <!-- Logo Section -->
+    <div class="logo">
+        <a href="#">Logo</a>
+    </div>
+
+    <!-- Navigation Section -->
+    <nav class="d-flex align-items-center">
+        <ul class="nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="sanPhamDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sản phẩm
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="sanPhamDropdown">
+                    <li><a class="dropdown-item" href="#">Nội thất</a></li>
+                    <li><a class="dropdown-item" href="#">Đồ trang trí</a></li>
+                    <li><a class="dropdown-item" href="#">Vật dụng</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="phongDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Phòng
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="phongDropdown">
+                    <li><a class="dropdown-item" href="#">Phòng khách</a></li>
+                    <li><a class="dropdown-item" href="#">Phòng bếp</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Góc cảm hứng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hướng dẫn</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Search and Icons Section -->
+    <div class="d-flex align-items-center">
+        <div class="search-bar">
+            <input type="text" class="form-control" placeholder="Tìm kiếm...">
+            <button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="icons">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="#">Trang chủ</a> /
+    <a href="#">Tài khoản</a>
+</div>
+
+<div class="account-management">
+    <div class="sidebar">
+        <h3>XIn chào, Quân Lê Anh!</h3>
+        <ul class="menu">
+            <li onclick="showSection('account-info')">Thông tin tài khoản</li>
+            <li onclick="showSection('orders')">Đơn hàng của bạn</li>
+            <li onclick="showSection('change-password')">Đổi mật khẩu</li>
+            <li onclick="showSection('address-book')">Sổ địa chỉ (0)</li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="account-info" class="content-section">
+            <h3>Thông tin tài khoản</h3>
+            <p>Họ tên: Quân Lê Anh</p>
+            <p>Email: xxx@gmail.com</p>
+        </div>
+
+        <div id="orders" class="content-section" style="display: none;">
+            <h3>Đơn hàng của bạn</h3>
+            <table>
+                <tr>
+                    <th>Đơn hàng</th>
+                    <th>Ngày</th>
+                    <th>Địa chỉ</th>
+                    <th>Giá trị đơn hàng</th>
+                    <th>TT thanh toán</th>
+                </tr>
+                <tr>
+                    <td colspan="5">Không có đơn hàng nào.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="change-password" class="content-section" style="display: none;">
+            <h3>Đổi mật khẩu</h3>
+            <p>Để đảm bảo tính bảo mật, vui lòng đặt mật khẩu với ít nhất 8 ký tự</p>
+            <label for="old-password">Mật khẩu cũ *</label>
+            <input type="password" id="old-password" placeholder="Nhập mật khẩu cũ" required>
+            <br>
+            <label for="new-password">Mật khẩu mới *</label>
+            <input type="password" id="new-password" placeholder="Nhập mật khẩu mới" required>
+            <br>
+            
+            <label for="confirm-password">Xác nhận lại mật khẩu *</label>
+            <input type="password" id="confirm-password" placeholder="Xác nhận mật khẩu" required>
+            <br>
+            
+            <button type="submit" class="change-password-button">Đổi mật khẩu</button>
+        </div>
+
+        <div id="address-book" class="content-section" style="display: none;">
+            <h3>Sổ địa chỉ</h3>
+            <p>Địa chỉ của bạn</p>
+            <button class="add-address-button" onclick="showAddressForm()">Thêm địa chỉ</button>
+            <div class="add-address-form" style="display: none;">
+                <h3>Thêm địa chỉ</h3>
+                <label for="full-name">Họ tên *</label>
+                <input type="text" id="full-name" placeholder="Nhập họ tên" required>
+            
+                <label for="phone">Số điện thoại *</label>
+                <input type="tel" id="phone" placeholder="Nhập số điện thoại" required>
+            
+                <label for="province">Tỉnh thành *</label>
+                <select id="province" onchange="populateDistricts()">
+                    <option value="">Chọn tỉnh thành</option>
+                    <!-- Tỉnh thành sẽ được thêm vào đây -->
+                </select>
+            
+                <label for="district">Quận/Huyện *</label>
+                <select id="district" onchange="populateWards()" disabled>
+                    <option value="">Chọn quận/huyện</option>
+                    <!-- Quận/huyện sẽ được thêm vào đây -->
+                </select>
+            
+                <label for="ward">Phường/Xã *</label>
+                <select id="ward" disabled>
+                    <option value="">Chọn phường/xã</option>
+                    <!-- Phường/xã sẽ được thêm vào đây -->
+                </select>
+            
+                <label for="zip-code">Mã ZIP *</label>
+                <input type="text" id="zip-code" placeholder="Nhập mã ZIP" required>
+            
+                <div class="checkbox-container">
+                    <input type="checkbox" id="default-address">
+                    <label for="default-address">Đặt làm địa chỉ mặc định</label>
+                </div>
+            
+                <div class="form-actions">
+                    <button type="button" class="cancel-button" onclick="hideAddressForm()">Hủy</button>
+                    <button type="button" class="add-button" onclick="addAddress()">Thêm địa chỉ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</header>
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <!-- Logo and Info -->
+            <div class="col-md-3 footer-logo">
+                <h5>EGA Furniture</h5>
+                <p>Siêu thị nội thất EGA</p>
+                <p>Thương hiệu nội thất uy tín và chất lượng, cam kết mang đến những trải nghiệm mua sắm tiện lợi, hiện đại và phong phú</p>
+                <p>Mã số thuế: 12345678999</p>
+                <p>Địa chỉ: 70 Lu Gia, District 11, Ho Chi Minh City</p>
+                <p>Số điện thoại: 19006750</p>
+                <p>Email: support@sapo.vn</p>
+                <p>© Bản quyền thuộc về EGANY | Cung cấp bởi Sapo</p>
+            </div>
+
+            <!-- Customer Support -->
+            <div class="col-md-3 footer-support">
+                <h5>HỖ TRỢ KHÁCH HÀNG</h5>
+                <p><a href="#">Giới thiệu</a></p>
+                <p><a href="#">Thông tin liên hệ</a></p>
+                <p><a href="#">Tra cứu cửa hàng</a></p>
+                <p><a href="#">Tư vấn nội thất theo phong thủy</a></p>
+            </div>
+
+            <!-- Policies -->
+            <div class="col-md-3 footer-policy">
+                <h5>CHÍNH SÁCH</h5>
+                <p><a href="#">Điều khoản dịch vụ</a></p>
+                <p><a href="#">Chính sách bảo mật</a></p>
+                <p><a href="#">Chính sách đổi trả</a></p>
+                <p><a href="#">Chính sách giao hàng</a></p>
+                <p><a href="#">Chương trình cộng tác viên</a></p>
+            </div>
+
+            <!-- Newsletter Subscription -->
+            <div class="col-md-3 footer-subscribe">
+                <h5>ĐĂNG KÝ NHẬN TIN</h5>
+                <p>Bạn muốn nhận khuyến mãi đặc biệt? Đăng ký ngay.</p>
+                <input type="email" placeholder="Nhập địa chỉ email">
+                <button class="btn btn-warning btn-sm mt-2">Đăng ký</button>
+                <div class="social-icons mt-3">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-zalo"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <div class="payment-methods mt-3">
+                    <img src="https://via.placeholder.com/40x25?text=Visa" alt="Visa">
+                    <img src="https://via.placeholder.com/40x25?text=Mastercard" alt="Mastercard">
+                    <img src="https://via.placeholder.com/40x25?text=Paypal" alt="Paypal">
+                    <img src="https://via.placeholder.com/40x25?text=Bank" alt="Bank Transfer">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    function showSection(sectionId) {
+        // Ẩn tất cả các phần nội dung
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(section => {
+            section.style.display = 'none';
+        });
+        // Hiện phần nội dung tương ứng với sectionId
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+    function showAddressForm() {
+        const form = document.querySelector('.add-address-form');
+        form.style.display = 'block'; // Hiện form thêm địa chỉ
+        populateProvinces(); // Tải các tỉnh khi hiển thị form
+    }
+
+    function hideAddressForm() {
+        const form = document.querySelector('.add-address-form');
+        form.style.display = 'none'; // Ẩn form thêm địa chỉ
+    }
+
+    function populateProvinces() {
+        const provinces = [
+            "Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Cần Thơ", "Hải Phòng", 
+            "Nghệ An", "Thanh Hóa", "Đồng Nai", "Bình Dương", "Hải Dương",
+            "Khánh Hòa", "Quảng Ninh", "Nam Định", "Thái Nguyên", "Lào Cai",
+            "Hưng Yên", "Thừa Thiên Huế", "Bắc Ninh", "Bà Rịa - Vũng Tàu",
+            "Đồng Tháp", "An Giang", "Vĩnh Long", "Ninh Thuận", "Bắc Giang",
+            "Sóc Trăng", "Kiên Giang", "Đắk Lắk", "Bình Định", "Phú Thọ",
+            "Hà Giang", "Tuyên Quang", "Yên Bái", "Lạng Sơn", "Cao Bằng",
+            "Điện Biên", "Hòa Bình", "Kon Tum", "Gia Lai", "Đắk Nông",
+            "Hà Tĩnh", "Quảng Bình", "Quảng Trị", "Ninh Bình", "Thái Bình",
+            "Nam Định", "Bắc Kạn", "Lai Châu", "Sơn La", "Lào Cai",
+            "Bến Tre", "Tiền Giang", "Long An", "Vĩnh Phúc", "Tây Ninh",
+            "Trà Vinh", "Hậu Giang", "Hà Nam", "Hà Tây", "Quảng Ngãi",
+            "Bình Thuận", "Ninh Thuận", "Bình Phước", "Hà Nội", "Hồ Chí Minh"
+        ];
+        const provinceSelect = document.getElementById('province');
+        provinces.forEach(province => {
+            const option = document.createElement('option');
+            option.value = province;
+            option.textContent = province;
+            provinceSelect.appendChild(option);
+        });
+    }
+
+    function populateDistricts() {
+        const districts = {
+            "Hà Nội": ["Quận Hoàn Kiếm", "Quận Ba Đình", "Quận Tây Hồ", "Quận Long Biên", "Quận Cầu Giấy"],
+            "Hồ Chí Minh": ["Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5"],
+            // Thêm dữ liệu cho các tỉnh thành khác tại đây
+        };
+        const provinceSelect = document.getElementById('province');
+        const districtSelect = document.getElementById('district');
+        const selectedProvince = provinceSelect.value;
+
+        districtSelect.innerHTML = ''; // Xóa các quận cũ
+        if (selectedProvince in districts) {
+            districtSelect.disabled = false;
+            districts[selectedProvince].forEach(district => {
+                const option = document.createElement('option');
+                option.value = district;
+                option.textContent = district;
+                districtSelect.appendChild(option);
+            });
+        } else {
+            districtSelect.disabled = true;
+        }
+    }
+
+    function populateWards() {
+        const wards = {
+            "Quận Hoàn Kiếm": ["Phường Tràng Tiền", "Phường Hàng Bông", "Phường Hàng Gai"],
+            "Quận Ba Đình": ["Phường Liễu Giai", "Phường Ngọc Khánh"],
+            // Thêm dữ liệu cho các quận huyện khác tại đây
+        };
+        const districtSelect = document.getElementById('district');
+        const wardSelect = document.getElementById('ward');
+        const selectedDistrict = districtSelect.value;
+
+        wardSelect.innerHTML = ''; // Xóa các phường cũ
+        if (selectedDistrict in wards) {
+            wardSelect.disabled = false;
+            wards[selectedDistrict].forEach(ward => {
+                const option = document.createElement('option');
+                option.value = ward;
+                option.textContent = ward;
+                wardSelect.appendChild(option);
+            });
+        } else {
+            wardSelect.disabled = true;
+        }
+    }
+
+    function addAddress() {
+        // Thực hiện hành động thêm địa chỉ tại đây
+        alert("Địa chỉ đã được thêm thành công!");
+        hideAddressForm(); // Ẩn form sau khi thêm địa chỉ
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

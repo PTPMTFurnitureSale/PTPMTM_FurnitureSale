@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .header {
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+        }
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header .nav-item {
+            margin-right: 20px;
+        }
+        .header .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .header .search-bar input {
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .header .icons i {
+            font-size: 18px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+    
+        /* Slider bar */
+        .slider-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px 0;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+    
+        /* Danh muc san pham */
+        .category-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        .category-item {
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .category-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: auto;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .category-item:hover .category-image {
+            transform: scale(1.1); /* Phóng to ảnh khi hover */
+        }
+        .category-name {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .category-quantity {
+            color: #777;
+            font-size: 0.9rem;
+        }
+    
+        /* San pham */
+        .promo-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffebcc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+        .promo-text h2 {
+            color: #ff6600;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        .promo-timer {
+            font-size: 1.5rem;
+            color: #333;
+            display: flex;
+            gap: 10px;
+            font-weight: bold;
+        }
+        .product-grid {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .product-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+        .product-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .product-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .product-name {
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+        .product-rating {
+            color: #ffcc00;
+        }
+        .product-pricing {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .product-price {
+            color: #ff6600;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .product-original-price {
+            color: #777;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+        .product-discount {
+            color: #ff3300;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .sales-progress {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .progress-bar {
+            background-color: #ff6600;
+        }
+        .view-more {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .view-more a {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ff6600;
+            text-decoration: none;
+        }
+    
+        /* Chung nhan của tôi */
+        .certification-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        .certification-section h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .certification-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .certification-item {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .certification-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .certification-item:hover img {
+            transform: scale(1.1); /* Phóng to hình ảnh khi hover */
+        }
+    
+        /* Phong ngu hanh phuc */
+        .feature-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        .feature-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .feature-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .feature-description {
+            background-color: #ffebd4;
+            padding: 0px;
+            border-radius: 8px;
+            margin-top: -5px;
+            padding-bottom: 50px;
+        }
+        .feature-description h2 {
+            margin-top: 50px !important;
+            color: #333;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 20px;
+            margin-bottom: 10px;
+        }
+        .feature-description p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0 60px;
+            margin-bottom: 15px;
+        }
+        .feature-description a {
+            color: #ff6600;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .feature-description a:hover {
+            text-decoration: underline;
+        }
+    
+        /* BST nội thất */
+        .collection-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        .collection-section h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .collection-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .collection-item {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .collection-item:hover {
+            transform: scale(1.05);
+        }
+        .collection-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .collection-info {
+            padding: 15px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .collection-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .collection-link a {
+            color: #ff6600;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .collection-link a:hover {
+            text-decoration: underline;
+        }
+    
+        /* 1 cau chuyen */
+        .story-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+        }
+        .story-image {
+            flex: 1;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .story-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .story-content {
+            flex: 1;
+            text-align: left;
+        }
+        .story-content h3 {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .story-content p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .story-content a {
+            color: #ff6600;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .story-content a:hover {
+            text-decoration: underline;
+        }
+    
+        /* footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+        }
+        .footer .footer-logo,
+        .footer .footer-support,
+        .footer .footer-policy,
+        .footer .footer-subscribe {
+            margin-bottom: 20px;
+        }
+        .footer h5 {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .footer p, .footer a {
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        .footer a:hover {
+            color: #ff6600;
+            text-decoration: none;
+        }
+        .footer .footer-subscribe input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .footer .social-icons a {
+            color: #bbb;
+            font-size: 1.2rem;
+            margin-right: 10px;
+            transition: color 0.3s;
+        }
+        .footer .social-icons a:hover {
+            color: #ff6600;
+        }
+        .footer .payment-methods img {
+            width: 40px;
+            margin-right: 10px;
+        }
+    
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header .nav-item {
+                margin-right: 10px;
+            }
+            .promo-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .category-item {
+                margin-bottom: 20px;
+            }
+            .feature-description p,
+            .feature-description h2 {
+                margin: 0 10px;
+            }
+            .collection-item {
+                max-width: 100%;
+            }
+            .story-section {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .story-image {
+                margin-bottom: 20px;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            .header .logo {
+                font-size: 20px;
+            }
+            .header .search-bar input {
+                width: 60%;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-name {
+                font-size: 0.9rem;
+            }
+            .footer h5 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+<header>
+<div class="header d-flex justify-content-between align-items-center">
+    <!-- Logo Section -->
+    <div class="logo">
+        <a href="#">Logo</a>
+    </div>
+
+    <!-- Navigation Section -->
+    <nav class="d-flex align-items-center">
+        <ul class="nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="sanPhamDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sản phẩm
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="sanPhamDropdown">
+                    <li><a class="dropdown-item" href="#">Nội thất</a></li>
+                    <li><a class="dropdown-item" href="#">Đồ trang trí</a></li>
+                    <li><a class="dropdown-item" href="#">Vật dụng</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="phongDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Phòng
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="phongDropdown">
+                    <li><a class="dropdown-item" href="#">Phòng khách</a></li>
+                    <li><a class="dropdown-item" href="#">Phòng bếp</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Góc cảm hứng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hướng dẫn</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Search and Icons Section -->
+    <div class="d-flex align-items-center">
+        <div class="search-bar">
+            <input type="text" class="form-control" placeholder="Tìm kiếm...">
+            <button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="icons">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </div>
+</div>
+<!-- slider bar -->
+    <div class="slider-container">
+        <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://via.placeholder.com/800x400?text=Image+1" class="d-block w-100" alt="Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/800x400?text=Image+2" class="d-block w-100" alt="Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/800x400?text=Image+3" class="d-block w-100" alt="Image 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/800x400?text=Image+4" class="d-block w-100" alt="Image 4">
+                </div>
+            </div>
+            <!-- Carousel controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#imageSlider" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#imageSlider" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- cagettory container -->
+    <div class="category-container">
+        <h2 class="mb-4">DANH MỤC SẢN PHẨM</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-2 col-sm-4 category-item">
+                <div class="category-image">
+                    <img src="https://via.placeholder.com/120x120?text=Phòng+ngủ" alt="Phòng ngủ">
+                </div>
+                <div class="category-name">Phòng ngủ</div>
+                <div class="category-quantity">120 sản phẩm</div>
+            </div>
+            <div class="col-md-2 col-sm-4 category-item">
+                <div class="category-image">
+                    <img src="https://via.placeholder.com/120x120?text=Phòng+bếp" alt="Phòng bếp">
+                </div>
+                <div class="category-name">Phòng bếp</div>
+                <div class="category-quantity">85 sản phẩm</div>
+            </div>
+            <div class="col-md-2 col-sm-4 category-item">
+                <div class="category-image">
+                    <img src="https://via.placeholder.com/120x120?text=Phòng+khách" alt="Phòng khách">
+                </div>
+                <div class="category-name">Phòng khách</div>
+                <div class="category-quantity">97 sản phẩm</div>
+            </div>
+            <div class="col-md-2 col-sm-4 category-item">
+                <div class="category-image">
+                    <img src="https://via.placeholder.com/120x120?text=Phòng+làm+việc" alt="Phòng làm việc">
+                </div>
+                <div class="category-name">Phòng làm việc</div>
+                <div class="category-quantity">60 sản phẩm</div>
+            </div>
+            <div class="col-md-2 col-sm-4 category-item">
+                <div class="category-image">
+                    <img src="https://via.placeholder.com/120x120?text=Đèn+trang+trí" alt="Đèn trang trí">
+                </div>
+                <div class="category-name">Đèn trang trí</div>
+                <div class="category-quantity">45 sản phẩm</div>
+            </div>
+            <div class="col-md-2 col-sm-4 category-item">
+                <div class="category-image">
+                    <img src="https://via.placeholder.com/120x120?text=Kệ+lưu+trữ" alt="Kệ lưu trữ">
+                </div>
+                <div class="category-name">Kệ lưu trữ</div>
+                <div class="category-quantity">80 sản phẩm</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Happy Summer Promotion Section -->
+<div class="promo-section">
+    <div class="promo-text">
+        <h2>HAPPY SUMMER - GIẢM ĐẾN 50%</h2>
+    </div>
+    <div class="promo-timer">
+        <div id="timer">00:00:00:00</div>
+    </div>
+</div>
+
+<!-- Product Grid -->
+<div class="product-grid">
+    <!-- Product Item 1 -->
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add more products here -->
+    <!-- Product Item 2 to 8 (for demo, repeat product item template above and change details as needed) -->
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- View More Button -->
+<div class="view-more">
+    <a href="#">Xem thêm &gt;&gt;</a>
+</div>
+<!-- Certification Section -->
+<div class="certification-section">
+    <h2>CHỨNG NHẬN CỦA CHÚNG TÔI</h2>
+    <div class="certification-container">
+        <!-- Certification Image 1 -->
+        <div class="certification-item">
+            <img src="https://via.placeholder.com/200?text=Certification+1" alt="Certification 1">
+        </div>
+        <!-- Certification Image 2 -->
+        <div class="certification-item">
+            <img src="https://via.placeholder.com/200?text=Certification+2" alt="Certification 2">
+        </div>
+        <!-- Certification Image 3 -->
+        <div class="certification-item">
+            <img src="https://via.placeholder.com/200?text=Certification+3" alt="Certification 3">
+        </div>
+        <!-- Certification Image 4 -->
+        <div class="certification-item">
+            <img src="https://via.placeholder.com/200?text=Certification+4" alt="Certification 4">
+        </div>
+    </div>
+</div>
+
+<!-- Feature Section -->
+<div class="feature-section">
+    <!-- Background Description -->
+    <div class="feature-description">
+        <div class="feature-image">
+            <img src="https://via.placeholder.com/800x400?text=Image+1" alt="Phòng Ngủ Hạnh Phúc">
+        </div>
+        <h2>PHÒNG NGỦ HẠNH PHÚC</h2>
+        <p>Đắm mình trong chiếc giường trang trí với bộ khăn trải giường sang trọng, sự kết hợp giữa chất liệu vải xa hoa và đồ nội thất được sắp xếp hợp lý để tạo nên một thiên đường ngủ xa hoa. Lấy cảm hứng và biến nhạt nhẽo thành hạnh phúc.</p>
+        <a href="#">Xem thêm &gt;&gt;</a>
+    </div>
+</div>
+<!-- Collection Section -->
+<div class="collection-section">
+    <h2>BST NỘI THẤT DÀNH CHO BẠN</h2>
+    <div class="collection-container">
+        <!-- Collection Item 1 - Phòng Bếp -->
+        <div class="collection-item">
+            <div class="collection-image">
+                <img src="https://via.placeholder.com/300x200?text=BST+Phòng+Bếp" alt="BST Phòng Bếp">
+            </div>
+            <div class="collection-info">
+                <div class="collection-title">BST Phòng Bếp</div>
+                <div class="collection-link">
+                    <a href="#">Xem chi tiết &gt;&gt;</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Collection Item 2 - Phòng Ngủ -->
+        <div class="collection-item">
+            <div class="collection-image">
+                <img src="https://via.placeholder.com/300x200?text=BST+Phòng+Ngủ" alt="BST Phòng Ngủ">
+            </div>
+            <div class="collection-info">
+                <div class="collection-title">BST Phòng Ngủ</div>
+                <div class="collection-link">
+                    <a href="#">Xem chi tiết &gt;&gt;</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Collection Item 3 - Phòng Khách -->
+        <div class="collection-item">
+            <div class="collection-image">
+                <img src="https://via.placeholder.com/300x200?text=BST+Phòng+Khách" alt="BST Phòng Khách">
+            </div>
+            <div class="collection-info">
+                <div class="collection-title">BST Phòng Khách</div>
+                <div class="collection-link">
+                    <a href="#">Xem chi tiết &gt;&gt;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Happy Summer Promotion Section -->
+    <div class="promo-section">
+        <div class="promo-text">
+            <h2>NEW ARRIVAL - NỘI THẤT HIỆN ĐẠI</h2>
+        </div>
+    </div>
+    
+    <!-- Product Grid -->
+    <div class="product-grid">
+        <!-- Product Item 1 -->
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Add more products here -->
+        <!-- Product Item 2 to 8 (for demo, repeat product item template above and change details as needed) -->
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story Section -->
+<div class="story-section">
+    <!-- Left Side - Image -->
+    <div class="story-image">
+        <img src="https://via.placeholder.com/600x400?text=Hình+ảnh+Một+Chút+Câu+Chuyện" alt="Hình ảnh Một Chút Câu Chuyện">
+    </div>
+
+    <!-- Right Side - Content -->
+    <div class="story-content">
+        <h3>Một chút câu chuyện</h3>
+        <p>Với ước mơ tạo ra thứ gì đó đặc biệt, EGA Furniture đã thành lập vào năm 2010. Tầm nhìn không chỉ là tạo ra những sản phẩm mang lại niềm vui cho thế giới những người yêu thích thiết kế nội thất mà họ còn muốn tạo ra một nền văn hóa công ty nơi nhân viên cảm thấy thoải mái. Vì vậy, từ khóa hạnh phúc đã ăn sâu vào DNA thương hiệu của chúng tôi.</p>
+        <p>Hạnh phúc là ở xung quanh bạn những người tốt và những sản phẩm mang lại niềm vui.</p>
+        <a href="#">Xem chi tiết &gt;&gt;</a>
+    </div>
+</div>
+
+    <!-- Happy Summer Promotion Section -->
+    <div class="promo-section">
+        <div class="promo-text">
+            <h2>NỘI THẤT PHÒNG BẾP</h2>
+        </div>
+    </div>
+    
+    <!-- Product Grid -->
+    <div class="product-grid">
+        <!-- Product Item 1 -->
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Add more products here -->
+        <!-- Product Item 2 to 8 (for demo, repeat product item template above and change details as needed) -->
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-item">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+            </div>
+            <div class="product-name">Sản phẩm 1</div>
+            <div class="product-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="product-pricing">
+                <span class="product-price">500,000₫</span>
+                <span class="product-original-price">1,000,000₫</span>
+                <span class="product-discount">-50%</span>
+            </div>
+            <div class="sales-progress">
+                Đã bán: 40/100
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- slider bar -->
+<div class="slider-container">
+    <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://via.placeholder.com/800x400?text=Image+1" class="d-block w-100" alt="Image 1">
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/800x400?text=Image+2" class="d-block w-100" alt="Image 2">
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/800x400?text=Image+3" class="d-block w-100" alt="Image 3">
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/800x400?text=Image+4" class="d-block w-100" alt="Image 4">
+            </div>
+        </div>
+        <!-- Carousel controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#imageSlider" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#imageSlider" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+</header>
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <!-- Logo and Info -->
+            <div class="col-md-3 footer-logo">
+                <h5>EGA Furniture</h5>
+                <p>Siêu thị nội thất EGA</p>
+                <p>Thương hiệu nội thất uy tín và chất lượng, cam kết mang đến những trải nghiệm mua sắm tiện lợi, hiện đại và phong phú</p>
+                <p>Mã số thuế: 12345678999</p>
+                <p>Địa chỉ: 70 Lu Gia, District 11, Ho Chi Minh City</p>
+                <p>Số điện thoại: 19006750</p>
+                <p>Email: support@sapo.vn</p>
+                <p>© Bản quyền thuộc về EGANY | Cung cấp bởi Sapo</p>
+            </div>
+
+            <!-- Customer Support -->
+            <div class="col-md-3 footer-support">
+                <h5>HỖ TRỢ KHÁCH HÀNG</h5>
+                <p><a href="#">Giới thiệu</a></p>
+                <p><a href="#">Thông tin liên hệ</a></p>
+                <p><a href="#">Tra cứu cửa hàng</a></p>
+                <p><a href="#">Tư vấn nội thất theo phong thủy</a></p>
+            </div>
+
+            <!-- Policies -->
+            <div class="col-md-3 footer-policy">
+                <h5>CHÍNH SÁCH</h5>
+                <p><a href="#">Điều khoản dịch vụ</a></p>
+                <p><a href="#">Chính sách bảo mật</a></p>
+                <p><a href="#">Chính sách đổi trả</a></p>
+                <p><a href="#">Chính sách giao hàng</a></p>
+                <p><a href="#">Chương trình cộng tác viên</a></p>
+            </div>
+
+            <!-- Newsletter Subscription -->
+            <div class="col-md-3 footer-subscribe">
+                <h5>ĐĂNG KÝ NHẬN TIN</h5>
+                <p>Bạn muốn nhận khuyến mãi đặc biệt? Đăng ký ngay.</p>
+                <input type="email" placeholder="Nhập địa chỉ email">
+                <button class="btn btn-warning btn-sm mt-2">Đăng ký</button>
+                <div class="social-icons mt-3">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-zalo"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <div class="payment-methods mt-3">
+                    <img src="https://via.placeholder.com/40x25?text=Visa" alt="Visa">
+                    <img src="https://via.placeholder.com/40x25?text=Mastercard" alt="Mastercard">
+                    <img src="https://via.placeholder.com/40x25?text=Paypal" alt="Paypal">
+                    <img src="https://via.placeholder.com/40x25?text=Bank" alt="Bank Transfer">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

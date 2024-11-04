@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .header {
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+        }
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header .nav-item {
+            margin-right: 20px;
+        }
+        .header .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .header .search-bar input {
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .header .icons i {
+            font-size: 18px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+    
+        .cart-page {
+    font-family: Arial, sans-serif;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+.cart-page h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.freeship-status {
+    background-color: #fff4e1;
+    border-radius: 5px;
+    padding: 10px;
+    padding-top: 1px;
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+.progress-bar {
+    background-color: #e0e0e0;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress {
+    background-color: #4CAF50;
+    height: 10px;
+}
+
+.freeship-code {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.code-tag {
+    background-color: #FFA726;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.copy-button {
+    background-color: #FFB74D;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #888;
+    cursor: pointer;
+}
+
+.cart-item img {
+    max-width: 80px;
+    border-radius: 5px;
+}
+
+.item-details h2 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+
+.item-price {
+    font-size: 18px;
+    color: #FF5722;
+    margin-left: auto;
+}
+
+.item-quantity input {
+    width: 40px;
+    text-align: center;
+}
+
+.order-note {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-note input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.checkout-summary {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.checkout-summary h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.checkout-summary label {
+    font-size: 14px;
+    color: #555;
+}
+
+.checkout-summary input[type="date"],
+.checkout-summary select,
+.checkout-summary input[type="text"] {
+    padding: 10px;
+    width: 100%;
+    margin: 5px 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.invoice-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.total {
+    font-size: 16px;
+    color: #333;
+    margin-top: 15px;
+}
+
+.total-price {
+    font-size: 24px;
+    color: #FF5722;
+    text-align: right;
+}
+.total-price span{
+    font-size: 14px;
+    color: #878787;
+    text-align: right;
+}
+.promo-code input {
+    width: calc(100% - 20px);
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.checkout-button {
+    background-color: black;
+    color: white;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.payment-methods img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.cart-page {
+    font-family: Arial, sans-serif;
+    max-width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+
+.cart-container {
+    display: flex; /* Use flexbox for layout */
+}
+
+.cart-items {
+    flex: 5; /* Take up 5/7 of the width */
+}
+
+.checkout-summary {
+    flex: 2; /* Take up 2/7 of the width */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-left: 20px; /* Optional spacing */
+}
+
+.cart-page h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;}
+
+/* Định dạng của input số lượng và nút tăng/giảm */
+.quantity-input {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid;
+    margin-bottom: 15px;
+    padding: 0px 20px;
+    border-radius: 4px;
+
+}
+
+.quantity-input input[type="number"] {
+    width: 50px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 5px 0;
+}
+.btn-decrease, .btn-increase {
+    font-size: 18px;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.btn-decrease:hover, .btn-increase:hover {
+    color: #ff6600; /* Màu cam khi hover */
+}
+
+/* San pham */
+.promo-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffebcc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+        .promo-text h2 {
+            color: #ff6600;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        .promo-timer {
+            font-size: 1.5rem;
+            color: #333;
+            display: flex;
+            gap: 10px;
+            font-weight: bold;
+        }
+        .product-grid {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .product-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+        .product-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .product-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .product-name {
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+        .product-rating {
+            color: #ffcc00;
+        }
+        .product-pricing {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .product-price {
+            color: #ff6600;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .product-original-price {
+            color: #777;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+        .product-discount {
+            color: #ff3300;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .sales-progress {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .progress-bar {
+            background-color: #ff6600;
+        }
+        .view-more {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .view-more a {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ff6600;
+            text-decoration: none;
+        }
+                                        /* Nhan xét */
+
+    /* Bo khung nhận xét */
+.review-section {
+    border: 1px solid rgba(128, 187, 53, 0.3); /* Viền bo nhẹ với màu rgba */
+    background-color: rgba(128, 187, 53, 0.1); /* Nền màu xanh nhạt */
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+/* Remaining CSS styles remain unchanged */
+
+    
+        /* footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+        }
+        .footer .footer-logo,
+        .footer .footer-support,
+        .footer .footer-policy,
+        .footer .footer-subscribe {
+            margin-bottom: 20px;
+        }
+        .footer h5 {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .footer p, .footer a {
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        .footer a:hover {
+            color: #ff6600;
+            text-decoration: none;
+        }
+        .footer .footer-subscribe input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .footer .social-icons a {
+            color: #bbb;
+            font-size: 1.2rem;
+            margin-right: 10px;
+            transition: color 0.3s;
+        }
+        .footer .social-icons a:hover {
+            color: #ff6600;
+        }
+        .footer .payment-methods img {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+    </style>
+    
+</head>
+<body>
+<header>
+<div class="header d-flex justify-content-between align-items-center">
+    <!-- Logo Section -->
+    <div class="logo">
+        <a href="#">Logo</a>
+    </div>
+
+    <!-- Navigation Section -->
+    <nav class="d-flex align-items-center">
+        <ul class="nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="sanPhamDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sản phẩm
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="sanPhamDropdown">
+                    <li><a class="dropdown-item" href="#">Nội thất</a></li>
+                    <li><a class="dropdown-item" href="#">Đồ trang trí</a></li>
+                    <li><a class="dropdown-item" href="#">Vật dụng</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="phongDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Phòng
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="phongDropdown">
+                    <li><a class="dropdown-item" href="#">Phòng khách</a></li>
+                    <li><a class="dropdown-item" href="#">Phòng bếp</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Góc cảm hứng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hướng dẫn</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Search and Icons Section -->
+    <div class="d-flex align-items-center">
+        <div class="search-bar">
+            <input type="text" class="form-control" placeholder="Tìm kiếm...">
+            <button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="icons">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </div>
+</div>
+<div class="cart-page">
+    <h1>Giỏ hàng</h1>
+    
+    <div class="cart-container">
+        <!-- Sản phẩm trong giỏ -->
+        <div class="cart-items">
+            <div class="progress-bar">
+                <div class="progress" style="width: 100%;"></div>
+            </div>
+            <p>100%</p>
+            <div class="freeship-status">
+                
+                <div class="freeship-code">
+                    <span class="code-tag">EGAFREESHIP</span>
+                    <button class="copy-button">Sao chép</button>
+                </div>
+            </div>
+            <p>Chúc mừng! Đơn hàng của bạn đã đủ điều kiện được Freeship 🎉</p>
+
+            <div class="cart-item">
+                <button class="remove-item">✖</button>
+                <img src="sofa-image.jpg" alt="Sofa">
+                <div class="item-details">
+                    <h2>Sofa Băng Phòng Khách Truyền Thống QP115</h2>
+                    <p>Xám ghi</p>
+                </div>
+                <p class="item-price">31.200.000đ</p>
+                <div class="quantity">
+                    <div class="quantity-input">
+                        <button type="button" class="btn-decrease"><i class="fas fa-minus"></i></button>
+                        <input type="number" id="quantity" value="1" min="1">
+                        <button type="button" class="btn-increase"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="order-note">
+                <label for="note">Ghi chú đơn hàng</label>
+                <input type="text" id="note" placeholder="Nhập ghi chú cho đơn hàng của bạn">
+            </div>
+        </div>
+
+        <!-- Thông tin thanh toán -->
+        <div class="checkout-summary">
+            <h3>Hẹn giờ nhận hàng</h3>
+            <label>Ngày nhận hàng</label>
+            <input type="date" value="2024-11-04">
+            <label>Thời gian nhận hàng</label>
+            <select>
+                <option>Chọn thời gian</option>
+                <!-- Thêm các tùy chọn khác -->
+            </select>
+            
+            <div class="invoice-option">
+                <input type="checkbox">
+                <label>Xuất hóa đơn công ty</label>
+            </div>
+            
+            <div class="total">
+                <h3>Tổng cộng</h3>
+                <p class="total-price">31.200.000đ <br><span>(Đã bao gồm VAT nếu có)</span></p>
+            </div>
+
+            <div class="promo-code">
+                <label for="promo">Mã giảm giá</label>
+                <input type="text" id="promo" placeholder="Chọn mã giảm giá">
+            </div>
+            
+            <button class="checkout-button">Thanh Toán</button>
+            
+            <div class="payment-methods">
+                <img src="visa-icon.png" alt="Visa">
+                <img src="momo-icon.png" alt="MoMo">
+                <img src="zalopay-icon.png" alt="ZaloPay">
+                <img src="cod-icon.png" alt="COD">
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- Happy Summer Promotion Section -->
+ <div class="promo-section">
+    <div class="promo-text">
+        <h2>Sản phẩm liên quan</h2>
+    </div>
+</div>
+
+<!-- Product Grid -->
+<div class="product-grid">
+    <!-- Product Item 1 -->
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add more products here -->
+    <!-- Product Item 2 to 8 (for demo, repeat product item template above and change details as needed) -->
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="product-item">
+        <div class="product-image">
+            <img src="https://via.placeholder.com/200x200?text=Product+1" alt="Product 1">
+        </div>
+        <div class="product-name">Sản phẩm 1</div>
+        <div class="product-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="product-pricing">
+            <span class="product-price">500,000₫</span>
+            <span class="product-original-price">1,000,000₫</span>
+            <span class="product-discount">-50%</span>
+        </div>
+        <div class="sales-progress">
+            Đã bán: 40/100
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+</header>
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <!-- Logo and Info -->
+            <div class="col-md-3 footer-logo">
+                <h5>EGA Furniture</h5>
+                <p>Siêu thị nội thất EGA</p>
+                <p>Thương hiệu nội thất uy tín và chất lượng, cam kết mang đến những trải nghiệm mua sắm tiện lợi, hiện đại và phong phú</p>
+                <p>Mã số thuế: 12345678999</p>
+                <p>Địa chỉ: 70 Lu Gia, District 11, Ho Chi Minh City</p>
+                <p>Số điện thoại: 19006750</p>
+                <p>Email: support@sapo.vn</p>
+                <p>© Bản quyền thuộc về EGANY | Cung cấp bởi Sapo</p>
+            </div>
+
+            <!-- Customer Support -->
+            <div class="col-md-3 footer-support">
+                <h5>HỖ TRỢ KHÁCH HÀNG</h5>
+                <p><a href="#">Giới thiệu</a></p>
+                <p><a href="#">Thông tin liên hệ</a></p>
+                <p><a href="#">Tra cứu cửa hàng</a></p>
+                <p><a href="#">Tư vấn nội thất theo phong thủy</a></p>
+            </div>
+
+            <!-- Policies -->
+            <div class="col-md-3 footer-policy">
+                <h5>CHÍNH SÁCH</h5>
+                <p><a href="#">Điều khoản dịch vụ</a></p>
+                <p><a href="#">Chính sách bảo mật</a></p>
+                <p><a href="#">Chính sách đổi trả</a></p>
+                <p><a href="#">Chính sách giao hàng</a></p>
+                <p><a href="#">Chương trình cộng tác viên</a></p>
+            </div>
+
+            <!-- Newsletter Subscription -->
+            <div class="col-md-3 footer-subscribe">
+                <h5>ĐĂNG KÝ NHẬN TIN</h5>
+                <p>Bạn muốn nhận khuyến mãi đặc biệt? Đăng ký ngay.</p>
+                <input type="email" placeholder="Nhập địa chỉ email">
+                <button class="btn btn-warning btn-sm mt-2">Đăng ký</button>
+                <div class="social-icons mt-3">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-zalo"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <div class="payment-methods mt-3">
+                    <img src="https://via.placeholder.com/40x25?text=Visa" alt="Visa">
+                    <img src="https://via.placeholder.com/40x25?text=Mastercard" alt="Mastercard">
+                    <img src="https://via.placeholder.com/40x25?text=Paypal" alt="Paypal">
+                    <img src="https://via.placeholder.com/40x25?text=Bank" alt="Bank Transfer">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

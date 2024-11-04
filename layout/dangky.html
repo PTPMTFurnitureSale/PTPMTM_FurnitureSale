@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .header {
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+        }
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header .nav-item {
+            margin-right: 20px;
+        }
+        .header .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .header .search-bar input {
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .header .icons i {
+            font-size: 18px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+    
+
+        .registration-page {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.registration-page h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.register-button {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.register-button:hover {
+    border: 1px solid #000000;
+
+}
+
+    
+        /* footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+        }
+        .footer .footer-logo,
+        .footer .footer-support,
+        .footer .footer-policy,
+        .footer .footer-subscribe {
+            margin-bottom: 20px;
+        }
+        .footer h5 {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .footer p, .footer a {
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        .footer a:hover {
+            color: #ff6600;
+            text-decoration: none;
+        }
+        .footer .footer-subscribe input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .footer .social-icons a {
+            color: #bbb;
+            font-size: 1.2rem;
+            margin-right: 10px;
+            transition: color 0.3s;
+        }
+        .footer .social-icons a:hover {
+            color: #ff6600;
+        }
+        .footer .payment-methods img {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+    </style>
+    
+</head>
+<body>
+<header>
+<div class="header d-flex justify-content-between align-items-center">
+    <!-- Logo Section -->
+    <div class="logo">
+        <a href="#">Logo</a>
+    </div>
+
+    <!-- Navigation Section -->
+    <nav class="d-flex align-items-center">
+        <ul class="nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="sanPhamDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sản phẩm
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="sanPhamDropdown">
+                    <li><a class="dropdown-item" href="#">Nội thất</a></li>
+                    <li><a class="dropdown-item" href="#">Đồ trang trí</a></li>
+                    <li><a class="dropdown-item" href="#">Vật dụng</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="phongDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Phòng
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="phongDropdown">
+                    <li><a class="dropdown-item" href="#">Phòng khách</a></li>
+                    <li><a class="dropdown-item" href="#">Phòng bếp</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Góc cảm hứng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hướng dẫn</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Search and Icons Section -->
+    <div class="d-flex align-items-center">
+        <div class="search-bar">
+            <input type="text" class="form-control" placeholder="Tìm kiếm...">
+            <button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="icons">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </div>
+</div>
+
+<div class="registration-page">
+    <h1>Đăng Ký Tài Khoản</h1>
+    <p style="text-align: center;">Bạn đã có tài khoản ? Đăng nhập <a style="text-decoration: none; color: #ff6600;" href="#">tại đây</a></p>
+    <form id="registration-form">
+        <div class="form-group">
+            <label for="full-name">Họ và Tên</label>
+            <input type="text" id="full-name" placeholder="Nhập họ và tên" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Nhập email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">Số Điện Thoại</label>
+            <input type="tel" id="phone" placeholder="Nhập số điện thoại" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Địa Chỉ</label>
+            <input type="text" id="address" placeholder="Nhập địa chỉ" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Mật Khẩu</label>
+            <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="confirm-password">Xác Nhận Mật Khẩu</label>
+            <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu" required>
+        </div>
+        
+        
+        
+        <button type="submit" class="register-button">Đăng Ký</button>
+    </form>
+</div>
+
+</header>
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <!-- Logo and Info -->
+            <div class="col-md-3 footer-logo">
+                <h5>EGA Furniture</h5>
+                <p>Siêu thị nội thất EGA</p>
+                <p>Thương hiệu nội thất uy tín và chất lượng, cam kết mang đến những trải nghiệm mua sắm tiện lợi, hiện đại và phong phú</p>
+                <p>Mã số thuế: 12345678999</p>
+                <p>Địa chỉ: 70 Lu Gia, District 11, Ho Chi Minh City</p>
+                <p>Số điện thoại: 19006750</p>
+                <p>Email: support@sapo.vn</p>
+                <p>© Bản quyền thuộc về EGANY | Cung cấp bởi Sapo</p>
+            </div>
+
+            <!-- Customer Support -->
+            <div class="col-md-3 footer-support">
+                <h5>HỖ TRỢ KHÁCH HÀNG</h5>
+                <p><a href="#">Giới thiệu</a></p>
+                <p><a href="#">Thông tin liên hệ</a></p>
+                <p><a href="#">Tra cứu cửa hàng</a></p>
+                <p><a href="#">Tư vấn nội thất theo phong thủy</a></p>
+            </div>
+
+            <!-- Policies -->
+            <div class="col-md-3 footer-policy">
+                <h5>CHÍNH SÁCH</h5>
+                <p><a href="#">Điều khoản dịch vụ</a></p>
+                <p><a href="#">Chính sách bảo mật</a></p>
+                <p><a href="#">Chính sách đổi trả</a></p>
+                <p><a href="#">Chính sách giao hàng</a></p>
+                <p><a href="#">Chương trình cộng tác viên</a></p>
+            </div>
+
+            <!-- Newsletter Subscription -->
+            <div class="col-md-3 footer-subscribe">
+                <h5>ĐĂNG KÝ NHẬN TIN</h5>
+                <p>Bạn muốn nhận khuyến mãi đặc biệt? Đăng ký ngay.</p>
+                <input type="email" placeholder="Nhập địa chỉ email">
+                <button class="btn btn-warning btn-sm mt-2">Đăng ký</button>
+                <div class="social-icons mt-3">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-zalo"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <div class="payment-methods mt-3">
+                    <img src="https://via.placeholder.com/40x25?text=Visa" alt="Visa">
+                    <img src="https://via.placeholder.com/40x25?text=Mastercard" alt="Mastercard">
+                    <img src="https://via.placeholder.com/40x25?text=Paypal" alt="Paypal">
+                    <img src="https://via.placeholder.com/40x25?text=Bank" alt="Bank Transfer">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
