@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Đăng Nhập";
+}
+<style>
+    .login-page {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .login-page h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+    .login-button {
+        background-color: #ff6600;
+        color: white;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+        .login-button:hover {
+            border: 1px solid #000000;
+        }
+
+</style>
+<div class="login-page">
+    <h1>Đăng Nhập</h1>
+    <form asp-action="Login" method="post">
+        <div class="form-group">
+            <label for="TaiKhoan">Tài Khoản</label>
+            <input type="text" name="taiKhoan" placeholder="Nhập tài khoản" required>
+            <span class="text-danger">
+                @Html.ValidationMessage("taiKhoan")
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="MatKhau">Mật Khẩu</label>
+            <input type="password" name="matKhau" placeholder="Nhập mật khẩu" required>
+            <span class="text-danger">
+                @Html.ValidationMessage("matKhau")
+            </span>
+        </div>
+
+        <button type="submit" class="login-button">Đăng Nhập</button>
+    </form>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="successMessage" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<script>
+    // Nếu có thông báo thành công, hiển thị trong 2 giây và chuyển hướng
+    const successMessage = document.getElementById("successMessage");
+    if (successMessage) {
+        setTimeout(() => {
+            successMessage.style.display = "none";
+            window.location.href = "/";
+        }, 2000);
+    }
+</script>
+
+
