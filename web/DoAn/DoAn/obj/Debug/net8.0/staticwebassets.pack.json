@@ -25,6 +25,270 @@
       "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
     },
     {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban.png",
+      "PackagePath": "staticwebassets\\lib\\ban.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban_an_bac_au.png",
+      "PackagePath": "staticwebassets\\lib\\ban_an_bac_au.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban_ben.png",
+      "PackagePath": "staticwebassets\\lib\\ban_ben.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban_ca_phe.png",
+      "PackagePath": "staticwebassets\\lib\\ban_ca_phe.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban_console.png",
+      "PackagePath": "staticwebassets\\lib\\ban_console.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban_go_kinh.png",
+      "PackagePath": "staticwebassets\\lib\\ban_go_kinh.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban_nhat.png",
+      "PackagePath": "staticwebassets\\lib\\ban_nhat.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\brand_1.webp",
+      "PackagePath": "staticwebassets\\lib\\brand_1.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\brand_2.webp",
+      "PackagePath": "staticwebassets\\lib\\brand_2.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\brand_3.webp",
+      "PackagePath": "staticwebassets\\lib\\brand_3.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\brand_4.webp",
+      "PackagePath": "staticwebassets\\lib\\brand_4.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\cod.png",
+      "PackagePath": "staticwebassets\\lib\\cod.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\den.png",
+      "PackagePath": "staticwebassets\\lib\\den.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\den_ap_tran.png",
+      "PackagePath": "staticwebassets\\lib\\den_ap_tran.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\den_chum.png",
+      "PackagePath": "staticwebassets\\lib\\den_chum.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\den_led_tran.png",
+      "PackagePath": "staticwebassets\\lib\\den_led_tran.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\den_san.png",
+      "PackagePath": "staticwebassets\\lib\\den_san.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\den_treo_dong.png",
+      "PackagePath": "staticwebassets\\lib\\den_treo_dong.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\den_tuong_studio.png",
+      "PackagePath": "staticwebassets\\lib\\den_tuong_studio.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\den_tuong_wally.png",
+      "PackagePath": "staticwebassets\\lib\\den_tuong_wally.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ghe.png",
+      "PackagePath": "staticwebassets\\lib\\ghe.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ghe_an_loft.png",
+      "PackagePath": "staticwebassets\\lib\\ghe_an_loft.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ghe_dau_forma.png",
+      "PackagePath": "staticwebassets\\lib\\ghe_dau_forma.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ghe_dau_go.png",
+      "PackagePath": "staticwebassets\\lib\\ghe_dau_go.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ghe_haze.png",
+      "PackagePath": "staticwebassets\\lib\\ghe_haze.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ghế đẩu.png",
+      "PackagePath": "staticwebassets\\lib\\ghế đẩu.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\imgtext_2_img.webp",
+      "PackagePath": "staticwebassets\\lib\\imgtext_2_img.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\logo.webp",
+      "PackagePath": "staticwebassets\\lib\\logo.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\lookbook_1_image.webp",
+      "PackagePath": "staticwebassets\\lib\\lookbook_1_image.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\lookbook_2_image.webp",
+      "PackagePath": "staticwebassets\\lib\\lookbook_2_image.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\lookbook_3_image.webp",
+      "PackagePath": "staticwebassets\\lib\\lookbook_3_image.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\lookbook_oneproduct_img.webp",
+      "PackagePath": "staticwebassets\\lib\\lookbook_oneproduct_img.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\mochi_pouffe (2).png",
+      "PackagePath": "staticwebassets\\lib\\mochi_pouffe (2).png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\mochi_pouffe.png",
+      "PackagePath": "staticwebassets\\lib\\mochi_pouffe.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\momo.png",
+      "PackagePath": "staticwebassets\\lib\\momo.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\nha_bep.png",
+      "PackagePath": "staticwebassets\\lib\\nha_bep.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\pochie nhiều màu.png",
+      "PackagePath": "staticwebassets\\lib\\pochie nhiều màu.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\slide_product_2_img_1_img.webp",
+      "PackagePath": "staticwebassets\\lib\\slide_product_2_img_1_img.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\slider_1.webp",
+      "PackagePath": "staticwebassets\\lib\\slider_1.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\slider_2.webp",
+      "PackagePath": "staticwebassets\\lib\\slider_2.webp"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\slider_bottom_1.png",
+      "PackagePath": "staticwebassets\\lib\\slider_bottom_1.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\slider_bottom_2.png",
+      "PackagePath": "staticwebassets\\lib\\slider_bottom_2.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\slider_bottom_3.png",
+      "PackagePath": "staticwebassets\\lib\\slider_bottom_3.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\sofa.png",
+      "PackagePath": "staticwebassets\\lib\\sofa.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\sofa_goc.png",
+      "PackagePath": "staticwebassets\\lib\\sofa_goc.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\sofa_lewis.png",
+      "PackagePath": "staticwebassets\\lib\\sofa_lewis.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\sofa_prime.png",
+      "PackagePath": "staticwebassets\\lib\\sofa_prime.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\sofa_qp115.png",
+      "PackagePath": "staticwebassets\\lib\\sofa_qp115.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\sofa_scandinavian.png",
+      "PackagePath": "staticwebassets\\lib\\sofa_scandinavian.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\sofa_shade.png",
+      "PackagePath": "staticwebassets\\lib\\sofa_shade.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\sofa_vinta.png",
+      "PackagePath": "staticwebassets\\lib\\sofa_vinta.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu giay ke ngang co cua .png",
+      "PackagePath": "staticwebassets\\lib\\tu giay ke ngang co cua .png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu.png",
+      "PackagePath": "staticwebassets\\lib\\tu.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_giay.png",
+      "PackagePath": "staticwebassets\\lib\\tu_giay.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_giay_lua.png",
+      "PackagePath": "staticwebassets\\lib\\tu_giay_lua.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_giay_soi.png",
+      "PackagePath": "staticwebassets\\lib\\tu_giay_soi.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_guong_tam.png",
+      "PackagePath": "staticwebassets\\lib\\tu_guong_tam.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_hobro.png",
+      "PackagePath": "staticwebassets\\lib\\tu_hobro.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_kolding.png",
+      "PackagePath": "staticwebassets\\lib\\tu_kolding.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_oslo.png",
+      "PackagePath": "staticwebassets\\lib\\tu_oslo.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_quan_ao.png",
+      "PackagePath": "staticwebassets\\lib\\tu_quan_ao.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_ruou.png",
+      "PackagePath": "staticwebassets\\lib\\tu_ruou.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_vline.png",
+      "PackagePath": "staticwebassets\\lib\\tu_vline.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tủ kệ tv 2.png",
+      "PackagePath": "staticwebassets\\lib\\tủ kệ tv 2.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\visa.png",
+      "PackagePath": "staticwebassets\\lib\\visa.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\zalopay.png",
+      "PackagePath": "staticwebassets\\lib\\zalopay.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DoAn.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

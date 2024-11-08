@@ -1,0 +1,484 @@
+﻿@model DoAn.Models.KhachHang
+@{
+    ViewBag.Title = "Quản lý tài khoản";
+}
+<style>
+    .breadcrumb {
+        width: 70%;
+        margin: 10px auto;
+    }
+
+        .breadcrumb a {
+            text-decoration: none;
+        }
+
+    .account-management {
+        display: flex;
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    .sidebar {
+        width: 30%;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-right: 1px solid #ddd;
+    }
+
+        .sidebar h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+    .menu {
+        list-style: none;
+        padding: 0;
+    }
+
+        .menu li {
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+            .menu li:hover {
+                background-color: #e0e0e0;
+            }
+
+    .content {
+        width: 70%;
+        padding: 20px;
+    }
+
+    .content-section {
+        display: none; /* Initially hide all sections */
+    }
+
+        .content-section h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .content-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .content-section table, .content-section th, .content-section td {
+            border: 1px solid #ddd;
+        }
+
+        .content-section th, .content-section td {
+            padding: 10px;
+            text-align: left;
+        }
+
+    .change-password-button, .add-address-button {
+        background-color: #ff6600;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+        .change-password-button:hover, .add-address-button:hover {
+            background-color: #f7bd96;
+        }
+
+    label {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+        display: block; /* Đảm bảo nhãn đứng trên trường nhập liệu */
+    }
+
+    input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 15px; /* Khoảng cách giữa các trường nhập liệu */
+        transition: border-color 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển đổi */
+    }
+
+        input[type="password"]:focus {
+            border-color: #ff6600; /* Đổi màu viền khi trường được chọn */
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Hiệu ứng bóng mờ */
+            outline: none; /* Bỏ viền mặc định khi được chọn */
+        }
+
+    .change-password-button {
+        background-color: #ff6600;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s; /* Hiệu ứng chuyển đổi */
+    }
+
+        .change-password-button:hover {
+            background-color: #f7bd96; /* Đổi màu khi di chuột qua */
+        }
+
+    .add-address-form {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+        .add-address-form h3 {
+            margin-bottom: 15px;
+        }
+
+    label {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        transition: border-color 0.3s;
+    }
+
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        select:focus {
+            border-color: #ff6600;
+            outline: none;
+        }
+
+    .checkbox-container {
+        margin-bottom: 15px;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .cancel-button,
+    .add-button {
+        background-color: #ff6600;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+        .cancel-button:hover,
+        .add-button:hover {
+            background-color: #f7bd96;
+        }
+
+    .account-management {
+        display: flex;
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 20%;
+        padding: 10px;
+    }
+
+    .content {
+        width: 80%;
+        padding: 10px;
+    }
+
+    .menu li {
+        cursor: pointer;
+        list-style: none;
+        padding: 5px;
+    }
+
+        .menu li:hover {
+            background-color: #ddd;
+        }
+
+    .content-section {
+        margin-top: 10px;
+    }
+
+    .add-address-button {
+        margin-top: 10px;
+    }
+    /* CSS cho modal */
+    .modal {
+        display: none; /* Ẩn mặc định */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5); /* Màu nền trong suốt */
+    }
+
+    .modal-content {
+        background-color: #f9f9f9;
+        margin: 15% auto; /* 15% từ trên và căn giữa */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Chiều rộng của modal */
+        max-width: 600px; /* Chiều rộng tối đa */
+    }
+
+    .form-actions {
+        margin-top: 10px;
+    }
+
+</style>
+
+
+<div class="account-management">
+    <div class="sidebar">
+        <h3>Xin chào, @Model.TenKhachHang!</h3>
+        <ul class="menu">
+            <li onclick="showSection('account-info')">Thông tin tài khoản</li>
+            <li onclick="showSection('orders')">Đơn hàng của bạn</li>
+            <li onclick="showSection('change-password')">Đổi mật khẩu</li>
+            <li onclick="showSection('address-book')">Sổ địa chỉ</li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <!-- Thông tin tài khoản -->
+        <div id="account-info" class="content-section">
+            <h3>Thông tin tài khoản</h3>
+            <p>Họ tên: @Model.TenKhachHang</p>
+            <p>Email: @Model.Email</p>
+        </div>
+
+        <!-- Đơn hàng -->
+        <div id="orders" class="content-section" style="display: none;">
+            <h3>Đơn hàng của bạn</h3>
+            <table>
+                <tr>
+                    <th>Đơn hàng</th>
+                    <th>Ngày</th>
+                    <th>Địa chỉ</th>
+                    <th>Giá trị đơn hàng</th>
+                    <th>TT thanh toán</th>
+                </tr>
+                @if (ViewBag.Orders != null && ViewBag.Orders.Count > 0)
+                {
+                    foreach (var order in ViewBag.Orders)
+                    {
+                        <tr>
+                            <td>@order.IdHoaDon</td>
+                            <td>@order.NgayDat.ToString("dd/MM/yyyy")</td>
+                            <td>@order.KhachHang.DiaChi</td>
+                            <td>@order.TongTien.ToString("C")</td>
+                            <td>@(order.TinhTrangThanhToan == 1 ? "Đã thanh toán" : "Chưa thanh toán")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5">Không có đơn hàng nào.</td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <!-- Đổi mật khẩu -->
+        <div id="change-password" class="content-section" style="display: none;">
+            <h3>Đổi mật khẩu</h3>
+            <p>Để đảm bảo tính bảo mật, vui lòng đặt mật khẩu với ít nhất 8 ký tự</p>
+            @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post))
+            {
+                <label for="old-password">Mật khẩu cũ *</label>
+                <input type="password" name="oldPassword" id="old-password" required>
+                <br>
+                <label for="new-password">Mật khẩu mới *</label>
+                <input type="password" name="newPassword" id="new-password" required>
+                <br>
+                <label for="confirm-password">Xác nhận lại mật khẩu *</label>
+                <input type="password" name="confirmPassword" id="confirm-password" required>
+                <br>
+                <button type="submit" class="change-password-button">Đổi mật khẩu</button>
+            }
+        </div>
+
+        <!-- Cập nhật địa chỉ -->
+        <div id="address-book" class="content-section" style="display: none;">
+            <h3>Sổ địa chỉ</h3>
+            <p>Địa chỉ của bạn: <span id="current-address">@Model.DiaChiGiaoHang</span></p>
+            <button class="add-address-button" onclick="showAddressForm()">
+                @if (Model.DiaChiGiaoHang == "Không")
+                {
+                    <text>Thêm địa chỉ</text>
+                }
+                else
+                {
+                    <text>Cập nhật địa chỉ</text>
+                }
+            </button>
+
+            <div class="add-address-form" style="display: none;">
+                <h3>@(Model.DiaChiGiaoHang == "Không" ? "Thêm địa chỉ" : "Cập nhật địa chỉ")</h3>
+                @using (Html.BeginForm("UpdateAddress", "Account", FormMethod.Post))
+                {
+                    <!-- Dropdown cho tỉnh thành -->
+                    <label for="province">Tỉnh thành *</label>
+                    <select name="province" id="province" onchange="populateDistricts()">
+                        <option value="">Chọn tỉnh thành</option>
+                        <!-- Tỉnh thành sẽ được thêm vào đây -->
+                    </select>
+
+                    <!-- Dropdown cho quận huyện -->
+                    <label for="district">Quận/Huyện *</label>
+                    <select name="district" id="district" onchange="populateWards()" disabled>
+                        <option value="">Chọn quận/huyện</option>
+                        <!-- Quận/huyện sẽ được thêm vào đây -->
+                    </select>
+
+                    <!-- Dropdown phường xã thành input text -->
+                    <label for="specific-address">Địa chỉ cụ thể *</label>
+                    <input type="text" name="specificAddress" id="specific-address" placeholder="Nhập địa chỉ cụ thể" required>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-button" onclick="hideAddressForm()">Hủy</button>
+                        <button type="submit" class="add-button">
+                            @(Model.DiaChiGiaoHang == "Không" ? "Thêm địa chỉ" : "Cập nhật địa chỉ")
+                        </button>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Gọi hàm populateProvinces khi trang được tải để điền tỉnh thành
+                populateProvinces();
+            });
+
+            function showSection(sectionId) {
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                document.getElementById(sectionId).style.display = 'block';
+            }
+
+            function showAddressForm() {
+                document.querySelector('.add-address-form').style.display = 'block';
+            }
+
+            function hideAddressForm() {
+                document.querySelector('.add-address-form').style.display = 'none';
+            }
+
+            function saveAddress() {
+                const province = document.getElementById("province").value;
+                const district = document.getElementById("district").value;
+                const specificAddress = document.getElementById("specific-address").value;
+
+                // Kiểm tra đầy đủ thông tin
+                if (!province || !district || !specificAddress) {
+                    alert("Vui lòng điền đầy đủ thông tin.");
+                    return;
+                }
+
+                // Tạo chuỗi địa chỉ mới
+                const newAddress = `${province}, ${district}, ${specificAddress}`;
+
+                // Gửi yêu cầu AJAX để cập nhật địa chỉ
+                fetch('/Account/UpdateAddress', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() // Nếu bạn sử dụng token chống giả mạo
+                    },
+                    body: JSON.stringify({
+                        newAddress: newAddress // Send the new address as a single string
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Cập nhật địa chỉ thành công!');
+                            document.getElementById("current-address").innerText = newAddress; // Update the address in the UI
+                            hideAddressForm();
+                        } else {
+                            alert('Có lỗi xảy ra, vui lòng thử lại.');
+                        }
+                    })
+                    .catch(error => {
+                        alert('Có lỗi xảy ra, vui lòng thử lại.');
+                    });
+            }
+
+            function populateProvinces() {
+                const provinces = [
+                    "Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Cần Thơ", "Hải Phòng",
+                    "Nghệ An", "Thanh Hóa", "Đồng Nai", "Bình Dương", "Hải Dương",
+                    "Khánh Hòa", "Quảng Ninh", "Nam Định", "Thái Nguyên", "Lào Cai",
+                    "Hưng Yên", "Thừa Thiên Huế", "Bắc Ninh", "Bà Rịa - Vũng Tàu",
+                    "Đồng Tháp", "An Giang", "Vĩnh Long", "Ninh Thuận", "Bắc Giang",
+                    "Sóc Trăng", "Kiên Giang", "Đắk Lắk", "Bình Định", "Phú Thọ",
+                    "Hà Giang", "Tuyên Quang", "Yên Bái", "Lạng Sơn", "Cao Bằng",
+                    "Điện Biên", "Hòa Bình", "Kon Tum", "Gia Lai", "Đắk Nông",
+                    "Hà Tĩnh", "Quảng Bình", "Quảng Trị", "Ninh Bình", "Thái Bình",
+                    "Nam Định", "Bắc Kạn", "Lai Châu", "Sơn La", "Lào Cai",
+                    "Bến Tre", "Tiền Giang", "Long An", "Vĩnh Phúc", "Tây Ninh",
+                    "Trà Vinh", "Hậu Giang", "Hà Nam", "Hà Tây", "Quảng Ngãi",
+                    "Bình Thuận", "Ninh Thuận", "Bình Phước", "Hà Nội", "Hồ Chí Minh"
+                ];
+                const provinceSelect = document.getElementById('province');
+                provinces.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province;
+                    option.textContent = province;
+                    provinceSelect.appendChild(option);
+                });
+            }
+
+            function populateDistricts() {
+                const districts = {
+                    "Hà Nội": ["Quận Hoàn Kiếm", "Quận Ba Đình", "Quận Tây Hồ", "Quận Long Biên", "Quận Cầu Giấy"],
+                    "Hồ Chí Minh": ["Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5"],
+                    // Thêm dữ liệu cho các tỉnh thành khác tại đây
+                };
+                const provinceSelect = document.getElementById('province');
+                const districtSelect = document.getElementById('district');
+                const selectedProvince = provinceSelect.value;
+
+                districtSelect.innerHTML = ''; // Xóa các quận cũ
+                if (selectedProvince in districts) {
+                    districtSelect.disabled = false;
+                    districts[selectedProvince].forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district;
+                        option.textContent = district;
+                        districtSelect.appendChild(option);
+                    });
+                } else {
+                    districtSelect.disabled = true;
+                }
+            }
+        </script>

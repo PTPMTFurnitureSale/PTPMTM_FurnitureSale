@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DoAn.Models
 {
+    [Table("san_pham")]
     public class SanPham
     {
         [Key]
@@ -13,10 +14,10 @@ namespace DoAn.Models
         public string TenSanPham { get; set; }
 
         [Column("don_gia")]
-        public float DonGia { get; set; }
+        public double DonGia { get; set; }
 
         [Column("diem")]
-        public float Diem { get; set; }
+        public double Diem { get; set; }
 
         [Column("hinh")]
         public string Hinh { get; set; }
@@ -25,8 +26,10 @@ namespace DoAn.Models
         public string MoTa { get; set; }
 
         [Column("id_loai")]
-        public int IdLoai { get; set; }
+        public string IdLoai { get; set; }
+        [ForeignKey("IdLoai")]
         public LoaiSanPham LoaiSanPham { get; set; }
         public ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
+        public ICollection<KhuyenMai> KhuyenMais { get; set; } // Mối quan hệ với KhuyenMai
     }
 }

@@ -1,0 +1,144 @@
+﻿@model DoAn.Models.ProductViewModel;
+
+<div class="product-list-page">
+    <div class="filters">
+        <h2>Tất cả sản phẩm</h2>
+
+        <!-- Bộ lọc sắp xếp -->
+        <div class="sorting">
+            <label for="sort">Sắp xếp:</label>
+            <select id="sort">
+                <option value="name-asc">Tên A → Z</option>
+                <option value="name-decs">Tên Z → A</option>
+            </select>
+        </div>
+
+        <!-- Bộ lọc loại sản phẩm -->
+        <h3>Loại</h3>
+        <div class="checkbox-group" id="product-type-filters">
+            @foreach (var type in Model.ProductTypes)
+            {
+                <label>
+                    <input type="checkbox" class="product-type-checkbox" value="@type.TenLoai"> @type.TenLoai
+                </label>
+            }
+            <a href="#" class="view-more">Xem thêm</a>
+        </div>
+
+        <!-- Bộ lọc theo mức giá -->
+        <h3>Mức giá</h3>
+        <div class="price-filter">
+            <label for="min-price">Giá từ: </label>
+            <input type="number" id="min-price" min="0" placeholder="Min" />
+            <label for="max-price">Giá đến: </label>
+            <input type="number" id="max-price" min="0" placeholder="Max" />
+        </div>
+
+        <!-- Nút Lọc -->
+        <button id="filter-btn" class="btn btn-primary">Lọc</button>
+    </div>
+
+    <!-- Khu vực hiển thị sản phẩm -->
+    <div class="product-grid" id="product-grid">
+        @foreach (var sp in Model.Products)
+        {
+            <div class="product-item" data-id="@sp.IdSanPham" data-price="@sp.DonGia" data-type="@sp.LoaiSanPham.TenLoai">
+                <div class="product-image">
+                    <img src="~/lib/@sp.Hinh" alt="@sp.TenSanPham" style="width: 200px; height: 200px;">
+                </div>
+                <div class="product-name">@sp.TenSanPham</div>
+                <div class="product-rating">
+                    @for (int i = 0; i < (int)sp.Diem; i++)
+                    {
+                        <i class="fas fa-star"></i>
+                    }
+                    @if (sp.Diem % 1 != 0)
+                    {
+                        <i class="fas fa-star-half-alt"></i>
+                    }
+                </div>
+                <div class="product-pricing">
+                    @if (sp.KhuyenMais.Any(km => km.IdSanPham == sp.IdSanPham))
+                    {
+                        var discount = sp.KhuyenMais.First(km => km.IdSanPham == sp.IdSanPham);
+                        var discountedPrice = sp.DonGia * (1 - (discount.PhanTramKhuyenMai / 100.0));
+                        <span class="product-price">@discountedPrice.ToString("N0")₫</span>
+                        <span class="product-original-price">@sp.DonGia.ToString("N0")₫</span>
+                        <span class="product-discount">-@discount.PhanTramKhuyenMai% Khuyến mãi</span>
+                    }
+                    else
+                    {
+                        <span class="product-price">@sp.DonGia.ToString("N0")₫</span>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#filter-btn').click(function () {
+            var selectedTypes = [];
+            var minPrice = $('#min-price').val();
+            var maxPrice = $('#max-price').val();
+            var sortOption = $('#sort').val();
+
+            // Lấy các loại sản phẩm đã chọn
+            $('#product-type-filters input:checked').each(function () {
+                selectedTypes.push($(this).val());
+            });
+
+            // Lọc các sản phẩm
+            $('#product-grid .product-item').each(function () {
+                var productType = $(this).data('type');
+                var productPrice = $(this).data('price');
+
+                // Kiểm tra loại sản phẩm
+                var matchesType = selectedTypes.length === 0 || selectedTypes.includes(productType);
+
+                // Kiểm tra mức giá
+                var matchesPrice = true;
+                if (minPrice && productPrice < minPrice) {
+                    matchesPrice = false;
+                }
+                if (maxPrice && productPrice > maxPrice) {
+                    matchesPrice = false;
+                }
+
+                // Kiểm tra điều kiện lọc
+                if (matchesType && matchesPrice) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+
+            // Sắp xếp sản phẩm nếu có lựa chọn
+            if (sortOption === 'name-asc') {
+                sortProducts(true);
+            } else if (sortOption === 'name-decs') {
+                sortProducts(false);
+            }
+        });
+
+        // Hàm sắp xếp sản phẩm theo tên
+        function sortProducts(ascending) {
+            var products = $('#product-grid .product-item').toArray();
+            products.sort(function (a, b) {
+                var nameA = $(a).find('.product-name').text().toLowerCase();
+                var nameB = $(b).find('.product-name').text().toLowerCase();
+                if (ascending) {
+                    return nameA.localeCompare(nameB);
+                } else {
+                    return nameB.localeCompare(nameA);
+                }
+            });
+
+            // Đưa các sản phẩm đã sắp xếp vào lại grid
+            $('#product-grid').html(products);
+        }
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

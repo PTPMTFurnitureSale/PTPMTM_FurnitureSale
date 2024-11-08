@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DoAn.Models
@@ -8,7 +7,7 @@ namespace DoAn.Models
     {
         [Key]
         [Column("id_hoa_don", Order = 0)]  // Combined the Order with Column attribute
-        public int IdHoaDon { get; set; }
+        public string IdHoaDon { get; set; } 
 
         [Key]
         [Column("id_san_pham", Order = 1)] // Combined the Order with Column attribute

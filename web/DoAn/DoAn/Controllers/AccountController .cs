@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DoAn.Controllers
 {
@@ -118,6 +119,82 @@ namespace DoAn.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
+        [Authorize]
+        public async Task<IActionResult> Profile()
+        {
+            var userName = User.Identity.Name; // Lấy tên người dùng từ Claims sau khi đăng nhập
+            var khachHang = await _context.KhachHangs
+                .FirstOrDefaultAsync(k => k.TaiKhoan == userName);
+
+            if (khachHang == null)
+            {
+                return RedirectToAction("Login"); // Chuyển hướng về trang đăng nhập nếu người dùng chưa đăng nhập
+            }
+
+            return View(khachHang); // Trả về view và hiển thị thông tin tài khoản của người dùng
+        }
+        // Đổi mật khẩu
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(string oldPassword, string newPassword, string confirmPassword)
+        {
+            if (string.IsNullOrEmpty(oldPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword))
+            {
+                ModelState.AddModelError("", "Vui lòng điền đầy đủ thông tin.");
+                return RedirectToAction("Profile");
+            }
+
+            if (newPassword != confirmPassword)
+            {
+                ModelState.AddModelError("confirmPassword", "Mật khẩu xác nhận không khớp.");
+                return RedirectToAction("Profile");
+            }
+
+            var userName = User.Identity.Name;
+            var user = await _context.KhachHangs.FirstOrDefaultAsync(k => k.TaiKhoan == userName);
+
+            if (user == null || user.MatKhau != oldPassword)
+            {
+                ModelState.AddModelError("oldPassword", "Mật khẩu cũ không đúng.");
+                return RedirectToAction("Profile");
+            }
+
+            user.MatKhau = newPassword;
+            _context.KhachHangs.Update(user);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Đổi mật khẩu thành công!";
+            return RedirectToAction("Profile");
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateAddress(string province, string district, string specificAddress)
+        {
+            var userName = User.Identity.Name;
+            var user = await _context.KhachHangs.FirstOrDefaultAsync(k => k.TaiKhoan == userName);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // Gộp địa chỉ lại thành chuỗi
+            var newAddress = $"{province}, {district}, {specificAddress}";
+
+            // Cập nhật địa chỉ giao hàng
+            user.DiaChiGiaoHang = newAddress;
+
+            _context.KhachHangs.Update(user);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Profile");
+        }
+
+
+
 
     }
 }

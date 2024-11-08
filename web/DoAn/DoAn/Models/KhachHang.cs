@@ -21,7 +21,8 @@ namespace DoAn.Models
 
         [Column("dia_chi")]
         public string DiaChi { get; set; }
-
+        [Column("dia_chi_giao_hang")]
+        public string DiaChiGiaoHang { get; set; } = "Không";  // Giá trị mặc định là "Không"
         [Column("email")]
         [EmailAddress(ErrorMessage = "Email không hợp lệ.")]
         public string Email { get; set; }

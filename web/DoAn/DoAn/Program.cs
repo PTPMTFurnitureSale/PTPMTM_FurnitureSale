@@ -15,9 +15,19 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/Account/Login"; // Đường dẫn tới trang đăng nhập
         options.LogoutPath = "/Account/Logout"; // Đường dẫn tới trang đăng xuất
     });
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-CSRF-TOKEN";  // Đảm bảo tên của token khớp với tên trong request header
+});
 
 var app = builder.Build();
 
@@ -35,7 +45,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -45,5 +55,12 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "SanPham",
+    pattern: "{controller=SanPham}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "Cart",
+    pattern: "{controller=Cart}/{action=Index}/{id?}");
+
 
 app.Run();

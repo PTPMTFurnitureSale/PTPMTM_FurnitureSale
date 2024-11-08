@@ -3,11 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DoAn.Models
 {
+    [Table("khuyen_mai")]
     public class KhuyenMai
     {
         [Key]
         [Column("id_khuyen_mai")]
-        public int IdKhuyenMai { get; set; }
+        public string IdKhuyenMai { get; set; }
 
         [Column("ten_khuyen_mai")]
         public string TenKhuyenMai { get; set; }
@@ -18,8 +19,10 @@ namespace DoAn.Models
         [Column("phan_tram_khuyen_mai")]
         public int PhanTramKhuyenMai { get; set; }
 
-        [Column("id_san_pham")]
+        [ForeignKey("SanPham")]
+        [Column("id_san_pham")]  // Chắc chắn rằng cột này tồn tại trong cơ sở dữ liệu
         public string IdSanPham { get; set; }
-        public SanPham SanPham { get; set; }
+
+        public SanPham SanPham { get; set; }  // Mối quan hệ với SanPham
     }
 }

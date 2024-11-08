@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - EGA Furniture</title>
+    @ViewData["Link"]
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        a{
+            text-decoration: none;
+            color: black;
+        }
         /* Header styles */
         .header {
             background-color: #f8f9fa;
@@ -16,8 +21,12 @@
             .header .logo {
                 font-size: 24px;
                 font-weight: bold;
+                max-height: 60px;
             }
 
+            .header .logo img {
+                max-height: 50px;
+            }
             .header .nav-item {
                 margin-right: 20px;
             }
@@ -99,22 +108,22 @@
         <div class="header d-flex justify-content-between align-items-center">
             <!-- Logo Section -->
             <div class="logo">
-                <a href="#">Logo</a>
+                <a href="@Url.Action("index", "Home")"><img src="~/lib/logo.webp" alt="Alternate Text" /></a>
             </div>
             <!-- Navigation Section -->
             <nav class="d-flex align-items-center">
                 <ul class="nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="sanPhamDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="@Url.Action("DanhSach", "SanPham")" id="sanPhamDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sản phẩm
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="sanPhamDropdown">
-                            <li><a class="dropdown-item" href="#">Nội thất</a></li>
-                            <li><a class="dropdown-item" href="#">Đồ trang trí</a></li>
-                            <li><a class="dropdown-item" href="#">Vật dụng</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("DanhSach", "SanPham")">Nội thất</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("DanhSach", "SanPham")">Đồ trang trí</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("DanhSach", "SanPham")">Vật dụng</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
+                    @* <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="phongDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Phòng
                         </a>
@@ -122,7 +131,7 @@
                             <li><a class="dropdown-item" href="#">Phòng khách</a></li>
                             <li><a class="dropdown-item" href="#">Phòng bếp</a></li>
                         </ul>
-                    </li>
+                    </li> *@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Góc cảm hứng</a>
                     </li>
@@ -136,14 +145,14 @@
             <div class="d-flex align-items-center">
                 <div class="search-bar">
                     <input type="text" class="form-control" placeholder="Tìm kiếm...">
-                    <button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+                    <a href="@Url.Action("SearchAjax", "SanPham")"><button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button></a>
                 </div>
                 <div class="icons">
                     <i class="fas fa-user dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                     <ul class="dropdown-menu" aria-labelledby="userDropdown">
                         @if (User.Identity.IsAuthenticated) // Kiểm tra xem người dùng đã đăng nhập chưa
                         {
-                            <li><a class="dropdown-item" href="#">@User.Identity.Name</a></li> <!-- Tên người dùng -->
+                            <li><a class="dropdown-item" href="@Url.Action("Profile", "Account")">@User.Identity.Name</a></li> <!-- Tên người dùng -->
                             <li><a class="dropdown-item" href="@Url.Action("Logout", "Account")">Thoát</a></li>
                         }
                         else
@@ -152,7 +161,7 @@
                             <li><a class="dropdown-item" href="@Url.Action("Register", "Account")">Đăng ký</a></li>
                         }
                     </ul>
-                    <i class="fas fa-shopping-cart"></i>
+                    <a href="@Url.Action("index", "Cart")"><i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
         </div>
@@ -196,7 +205,7 @@
                     <h5>ĐĂNG KÝ NHẬN TIN</h5>
                     <p>Bạn muốn nhận khuyến mãi đặc biệt? Đăng ký ngay.</p>
                     <input type="email" placeholder="Nhập địa chỉ email">
-                    <button class="btn btn-warning btn-sm mt-2">Đăng ký</button>
+                    <a href="@Url.Action("Register", "Account")" class="btn btn-warning btn-sm mt-2">Đăng ký</a>
                     <div class="social-icons mt-3">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-zalo"></i></a>
@@ -205,10 +214,10 @@
                         <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
                     <div class="payment-methods mt-3">
-                        <img src="https://via.placeholder.com/40x25?text=Visa" alt="Visa">
-                        <img src="https://via.placeholder.com/40x25?text=Mastercard" alt="Mastercard">
-                        <img src="https://via.placeholder.com/40x25?text=Paypal" alt="Paypal">
-                        <img src="https://via.placeholder.com/40x25?text=Bank" alt="Bank Transfer">
+                            <img src="~/lib/visa.png" alt="Visa">
+                            <img src="~/lib/momo.png" alt="MoMo">
+                            <img src="~/lib/zalopay.png" alt="ZaloPay">
+                            <img src="~/lib/cod.png" alt="COD">
                     </div>
                 </div>
             </div>
@@ -216,5 +225,26 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.search-bar input').on('input', function () {
+                var keyword = $(this).val();
+
+                $.ajax({
+                    url: '/SanPham/SearchAjax',
+                    type: 'GET',
+                    data: { keyword: keyword },
+                    success: function (response) {
+                        $('#search-results').html(response); // Cập nhật vùng kết quả
+                    },
+                    error: function () {
+                        console.error("Lỗi khi tải kết quả tìm kiếm.");
+                    }
+                });
+            });
+        });
+
+    </script>
 </body>
 </html>

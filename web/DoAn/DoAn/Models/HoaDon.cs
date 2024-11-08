@@ -7,7 +7,7 @@ namespace DoAn.Models
     {
         [Key]
         [Column("id_hoa_don")]
-        public int IdHoaDon { get; set; }
+        public string IdHoaDon { get; set; }
 
         [Column("id_khach_hang")]
         public string IdKhachHang { get; set; }
