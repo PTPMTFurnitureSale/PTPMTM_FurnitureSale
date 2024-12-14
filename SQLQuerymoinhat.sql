@@ -1,4 +1,4 @@
-﻿tui gửi lại cái database tui sửa rồi
+﻿
 -- Tạo cơ sở dữ liệu
 CREATE DATABASE QuanLyBanHang COLLATE Vietnamese_CI_AS;
 GO
@@ -39,7 +39,12 @@ CREATE TABLE khach_hang (
 	dia_chi_giao_hang NVARCHAR(200) DEFAULT 'Không'
 
 );
-
+-- Bảng loại sản phẩm
+CREATE TABLE loai_san_pham (
+    id_loai NVARCHAR(36) PRIMARY KEY,
+    ten_loai NVARCHAR(200),
+    hinh NVARCHAR(200)
+);
 -- Bảng sản phẩm
 CREATE TABLE san_pham (
     id_san_pham NVARCHAR(36) PRIMARY KEY,
@@ -49,16 +54,14 @@ CREATE TABLE san_pham (
     hinh NVARCHAR(500),
     mo_ta NVARCHAR(500),
     id_loai NVARCHAR(36), -- Chỉnh sửa kiểu dữ liệu cho đồng nhất
-	
+	so_luong_ton INT,
+
+
+
 
 );
 
--- Bảng loại sản phẩm
-CREATE TABLE loai_san_pham (
-    id_loai NVARCHAR(36) PRIMARY KEY,
-    ten_loai NVARCHAR(200),
-    hinh NVARCHAR(200)
-);
+
 
 -- Bảng hóa đơn
 CREATE TABLE hoa_don (
@@ -200,47 +203,47 @@ INSERT INTO khach_hang (id_khach_hang, ten_khach_hang, ngay_sinh, dia_chi, email
 
 go
 
-INSERT INTO san_pham (id_san_pham, ten_san_pham, don_gia, diem, hinh, mo_ta, id_loai) VALUES
-('SP001', N'Sofa Băng Phòng Khách Truyền Thống QP115', 15000000, 4.5, N'sofa_qp115.png', 'Sofa băng phong cách truyền thống cho phòng khách', 'L01'),
-	('SP002', N'Sofa Băng Bọc Vải Phong Cách Scandinavian', 18000000, 4.7, N'sofa_scandinavian.png', 'Sofa băng bọc vải phong cách Bắc Âu', 'L01'),
-    ('SP003', N'Sofa Băng Bọc Vải Siêu Rộng Lewis Extra QP243', 22000000, 4.8, N'sofa_lewis.png', 'Sofa băng siêu rộng cho gia đình', 'L01'),
-    ('SP004', N'Ghế Sofa Cao Cấp Shade', 25000000, 4.9, 'sofa_shade.png', N'Ghế sofa cao cấp thiết kế sang trọng', 'L01'),
-    ('SP005', N'Ghế đẩu Forma', 3000000, 4.2, 'ghe_dau_forma.png', N'Ghế đẩu nhỏ gọn, tiện lợi', 'L02'),
-    ('SP006', N'Ghế phòng chờ Haze', 7500000, 4.3, 'ghe_haze.png', 'NGhế phòng chờ thoải mái', 'L02'),
-    ('SP007', N'Mochi Pouffe / Nhiều màu', 2000000, 4.0, 'mochi_pouffe.png', N'Ghế lười đa dạng màu sắc', 'L02'),
-    ('SP008', N'Bàn bên bệ', 5000000, 4.1, 'ban_ben.png', N'Bàn nhỏ cho phòng khách', 'L03'),
-    ('SP009', N'Đèn áp trần pha lê', 12000000, 4.8, 'den_ap_tran.png', N'Đèn áp trần pha lê cao cấp', 'L04'),
-    ('SP010', N'Đèn chùm pha lê phòng khách', 18000000, 4.9, 'den_chum.png', N'Đèn chùm pha lê sang trọng', 'L04'),
-    ('SP011', N'Tủ Giày Kệ Ngăn Có Cửa - Elona', 5000000, 4.2, 'tu_giay.png', N'Tủ giày kệ ngăn tiện dụng', 'L05'),
-    ('SP012', N'Tủ Kệ Tivi Gỗ OSLO 201', 7000000, 4.3, 'tu_oslo.png', N'Tủ kệ tivi phong cách hiện đại', 'L05'),
-    ('SP013', N'Tủ Kệ Tivi Gỗ HOBRO 201', 6500000, 4.4, 'tu_hobro.png', N'Tủ kệ tivi thiết kế tối giản', 'L05'),
-    ('SP014', N'Tủ Kệ Tivi Gỗ KOLDING 702', 8000000, 4.5, 'tu_kolding.png', N'Tủ kệ tivi chất lượng cao', 'L05'),
-    ('SP015', N'Nhà bếp với đá lát kệ bếp sang trọng', 15000000, 4.8, 'nha_bep.png', N'Thiết kế bếp với đá lát sang trọng', 'L06'),
-    ('SP016', N'Tủ Kệ Tivi Gỗ Tràm VLINE 301', 8500000, 4.6, 'tu_vline.png', N'Tủ kệ tivi gỗ tràm', 'L05'),
-    ('SP017', N'Đèn tường Studio', 3000000, 4.0, 'den_tuong_studio.png', N'Đèn tường hiện đại phong cách studio', 'L04'),
-    ('SP018', N'Đèn tường Wally', 3200000, 4.1, 'den_tuong_wally.png', N'Đèn tường phong cách tối giản', 'L04'),
-    ('SP019', N'Mochi Pouffe / Nhiều màu', 2000000, 4.0, 'mochi_pouffe(2).png', N'Ghế lười đa dạng màu sắc', 'L02'),
-    ('SP020', N'Bàn Cà Phê Raw Đá Cẩm Thạch Đen', 9500000, 4.7, 'ban_ca_phe.png', N'Bàn cà phê với mặt đá cẩm thạch đen', 'L03'),
-	 ('SP021', N'Tủ Giày Đôi 4 Cánh Marcell', 11000000, 4.5, 'tu_giay_marcell.png', N'Tủ giày đôi 4 cánh chất liệu cao cấp', 'L05'),
-    ('SP022', N'Tủ Giày – Tủ Trang Trí Gỗ VIENNA 203', 12000000, 4.6, 'tu_giay_vienna.png', N'Tủ giày kết hợp tủ trang trí gỗ phong cách Vienna', 'L05'),
-    ('SP023', N'Bàn trà gỗ tự nhiên 5CBT-136', 6000000, 4.3, 'ban_tra_go.png', N'Bàn trà làm từ gỗ tự nhiên, thiết kế đơn giản', 'L03'),
-    ('SP024', N'Sofa Da Cao Cấp Prime', 28000000, 4.8, 'sofa_prime.png', N'Sofa da cao cấp cho không gian sang trọng', 'L01'),
-    ('SP025', N'Sofa Góc Bọc Nỉ HIỆN ĐẠI', 19000000, 4.5, 'sofa_goc.png', N'Sofa góc bọc nỉ phong cách hiện đại', 'L01'),
-    ('SP026', N'Ghế Ăn Loft Bọc Da', 4500000, 4.2, 'ghe_an_loft.png', N'Ghế ăn bọc da phong cách Loft', 'L02'),
-    ('SP027', N'Ghế Đẩu Gỗ Tự Nhiên', 2200000, 4.1, 'ghe_dau_go.png', N'Ghế đẩu làm từ gỗ tự nhiên', 'L02'),
-    ('SP028', N'Ghế Sofa Cổ Điển Vinta', 30000000, 4.9, 'sofa_vinta.png', N'Ghế sofa phong cách cổ điển', 'L01'),
-    ('SP029', N'Tủ Rượu Gỗ Tự Nhiên', 15500000, 4.7, 'tu_ruou.png', N'Tủ rượu làm từ gỗ tự nhiên với thiết kế sang trọng', 'L05'),
-    ('SP030', N'Tủ Giày Cửa Lùa Hiện Đại', 9800000, 4.4, 'tu_giay_lua.png', N'Tủ giày cửa lùa tiết kiệm không gian', 'L05'),
-    ('SP031', N'Bàn Làm Việc Kiểu Nhật', 5000000, 4.3, 'ban_nhat.png', N'Bàn làm việc thiết kế kiểu Nhật', 'L03'),
-    ('SP032', N'Bàn Ăn 6 Ghế Bắc Âu', 14000000, 4.6, 'ban_an_bac_au.png', N'Bàn ăn 6 ghế phong cách Bắc Âu', 'L03'),
-    ('SP033', N'Đèn Sàn Ánh Sáng Ấm', 5000000, 4.4, 'den_san.png', N'Đèn sàn với ánh sáng ấm áp', 'L04'),
-    ('SP034', N'Đèn LED Trần Nhà Thông Minh', 16000000, 4.8, 'den_led_tran.png', N'Đèn LED trần nhà tích hợp công nghệ thông minh', 'L04'),
-    ('SP035', N'Tủ Quần Áo 3 Cánh Đơn Giản', 10500000, 4.5, 'tu_quan_ao.png', N'Tủ quần áo 3 cánh gọn nhẹ và tiện dụng', 'L05'),
-    ('SP036', N'Tủ Gương Nhà Tắm Tích Hợp Đèn', 9000000, 4.3, 'tu_guong_tam.png', N'Tủ gương nhà tắm có tích hợp đèn LED', 'L05'),
-    ('SP037', N'Bàn Console Cổ Điển', 5500000, 4.2, 'ban_console.png', N'Bàn console phong cách cổ điển', 'L03'),
-    ('SP038', N'Tủ Giày Đa Năng Gỗ Sồi', 8000000, 4.4, 'tu_giay_soi.png', N'Tủ giày đa năng làm từ gỗ sồi', 'L05'),
-    ('SP039', N'Bàn Gỗ Mặt Kính Cao Cấp', 11500000, 4.7, 'ban_go_kinh.png', N'Bàn gỗ kết hợp mặt kính hiện đại', 'L03'),
-    ('SP040', N'Đèn Treo Tường Đồng Vintage', 4000000, 4.3, 'den_treo_dong.png', N'Đèn treo tường làm từ đồng phong cách vintage', 'L04');
+INSERT INTO san_pham (id_san_pham, ten_san_pham, so_luong_ton, don_gia, diem, hinh, mo_ta, id_loai) VALUES
+('SP001', N'Sofa Băng Phòng Khách Truyền Thống QP115', 3,  15000000, 4.5, N'sofa_qp115.png', 'Sofa băng phong cách truyền thống cho phòng khách', 'L01'),
+	('SP002', N'Sofa Băng Bọc Vải Phong Cách Scandinavian', 4, 18000000, 4.7, N'sofa_scandinavian.png', 'Sofa băng bọc vải phong cách Bắc Âu', 'L01'),
+    ('SP003', N'Sofa Băng Bọc Vải Siêu Rộng Lewis Extra QP243', 2, 22000000, 4.8, N'sofa_lewis.png', 'Sofa băng siêu rộng cho gia đình', 'L01'),
+    ('SP004', N'Ghế Sofa Cao Cấp Shade', 3, 25000000, 4.9, 'sofa_shade.png', N'Ghế sofa cao cấp thiết kế sang trọng', 'L01'),
+    ('SP005', N'Ghế đẩu Forma', 5, 3000000, 4.2, 'ghe_dau_forma.png', N'Ghế đẩu nhỏ gọn, tiện lợi', 'L02'),
+    ('SP006', N'Ghế phòng chờ Haze', 3, 7500000, 4.3, 'ghe_haze.png', 'NGhế phòng chờ thoải mái', 'L02'),
+    ('SP007', N'Mochi Pouffe / Nhiều màu', 5, 2000000, 4.0, 'mochi_pouffe.png', N'Ghế lười đa dạng màu sắc', 'L02'),
+    ('SP008', N'Bàn bên bệ', 2, 5000000, 4.1, 'ban_ben.png', N'Bàn nhỏ cho phòng khách', 'L03'),
+    ('SP009', N'Đèn áp trần pha lê', 1, 12000000, 4.8, 'den_ap_tran.png', N'Đèn áp trần pha lê cao cấp', 'L04'),
+    ('SP010', N'Đèn chùm pha lê phòng khách', 4, 18000000, 4.9, 'den_chum.png', N'Đèn chùm pha lê sang trọng', 'L04'),
+    ('SP011', N'Tủ Giày Kệ Ngăn Có Cửa - Elona', 5, 5000000, 4.2, 'tu_giay.png', N'Tủ giày kệ ngăn tiện dụng', 'L05'),
+    ('SP012', N'Tủ Kệ Tivi Gỗ OSLO 201', 6, 7000000, 4.3, 'tu_oslo.png', N'Tủ kệ tivi phong cách hiện đại', 'L05'),
+    ('SP013', N'Tủ Kệ Tivi Gỗ HOBRO 201', 7, 6500000, 4.4, 'tu_hobro.png', N'Tủ kệ tivi thiết kế tối giản', 'L05'),
+    ('SP014', N'Tủ Kệ Tivi Gỗ KOLDING 702', 8, 8000000, 4.5, 'tu_kolding.png', N'Tủ kệ tivi chất lượng cao', 'L05'),
+    ('SP015', N'Nhà bếp với đá lát kệ bếp sang trọng', 9, 15000000, 4.8, 'nha_bep.png', N'Thiết kế bếp với đá lát sang trọng', 'L06'),
+    ('SP016', N'Tủ Kệ Tivi Gỗ Tràm VLINE 301', 3, 8500000, 4.6, 'tu_vline.png', N'Tủ kệ tivi gỗ tràm', 'L05'),
+    ('SP017', N'Đèn tường Studio', 5, 3000000, 4.0, 'den_tuong_studio.png', N'Đèn tường hiện đại phong cách studio', 'L04'),
+    ('SP018', N'Đèn tường Wally', 2, 3200000, 4.1, 'den_tuong_wally.png', N'Đèn tường phong cách tối giản', 'L04'),
+    ('SP019', N'Mochi Pouffe / Nhiều màu', 6, 2000000, 4.0, 'mochi_pouffe(2).png', N'Ghế lười đa dạng màu sắc', 'L02'),
+    ('SP020', N'Bàn Cà Phê Raw Đá Cẩm Thạch Đen', 7, 9500000, 4.7, 'ban_ca_phe.png', N'Bàn cà phê với mặt đá cẩm thạch đen', 'L03'),
+	 ('SP021', N'Tủ Giày Đôi 4 Cánh Marcell', 8, 11000000, 4.5, 'tu_giay_marcell.png', N'Tủ giày đôi 4 cánh chất liệu cao cấp', 'L05'),
+    ('SP022', N'Tủ Giày – Tủ Trang Trí Gỗ VIENNA 203', 3, 12000000, 4.6, 'tu_giay_vienna.png', N'Tủ giày kết hợp tủ trang trí gỗ phong cách Vienna', 'L05'),
+    ('SP023', N'Bàn trà gỗ tự nhiên 5CBT-136', 2, 6000000, 4.3, 'ban_tra_go.png', N'Bàn trà làm từ gỗ tự nhiên, thiết kế đơn giản', 'L03'),
+    ('SP024', N'Sofa Da Cao Cấp Prime', 3, 28000000, 4.8, 'sofa_prime.png', N'Sofa da cao cấp cho không gian sang trọng', 'L01'),
+    ('SP025', N'Sofa Góc Bọc Nỉ HIỆN ĐẠI', 5, 19000000, 4.5, 'sofa_goc.png', N'Sofa góc bọc nỉ phong cách hiện đại', 'L01'),
+    ('SP026', N'Ghế Ăn Loft Bọc Da', 2, 4500000, 4.2, 'ghe_an_loft.png', N'Ghế ăn bọc da phong cách Loft', 'L02'),
+    ('SP027', N'Ghế Đẩu Gỗ Tự Nhiên', 3, 2200000, 4.1, 'ghe_dau_go.png', N'Ghế đẩu làm từ gỗ tự nhiên', 'L02'),
+    ('SP028', N'Ghế Sofa Cổ Điển Vinta', 5, 30000000, 4.9, 'sofa_vinta.png', N'Ghế sofa phong cách cổ điển', 'L01'),
+    ('SP029', N'Tủ Rượu Gỗ Tự Nhiên', 2, 15500000, 4.7, 'tu_ruou.png', N'Tủ rượu làm từ gỗ tự nhiên với thiết kế sang trọng', 'L05'),
+    ('SP030', N'Tủ Giày Cửa Lùa Hiện Đại', 3, 9800000, 4.4, 'tu_giay_lua.png', N'Tủ giày cửa lùa tiết kiệm không gian', 'L05'),
+    ('SP031', N'Bàn Làm Việc Kiểu Nhật', 2, 5000000, 4.3, 'ban_nhat.png', N'Bàn làm việc thiết kế kiểu Nhật', 'L03'),
+    ('SP032', N'Bàn Ăn 6 Ghế Bắc Âu', 5, 14000000, 4.6, 'ban_an_bac_au.png', N'Bàn ăn 6 ghế phong cách Bắc Âu', 'L03'),
+    ('SP033', N'Đèn Sàn Ánh Sáng Ấm', 6, 5000000, 4.4, 'den_san.png', N'Đèn sàn với ánh sáng ấm áp', 'L04'),
+    ('SP034', N'Đèn LED Trần Nhà Thông Minh', 9, 16000000, 4.8, 'den_led_tran.png', N'Đèn LED trần nhà tích hợp công nghệ thông minh', 'L04'),
+    ('SP035', N'Tủ Quần Áo 3 Cánh Đơn Giản', 2, 10500000, 4.5, 'tu_quan_ao.png', N'Tủ quần áo 3 cánh gọn nhẹ và tiện dụng', 'L05'),
+    ('SP036', N'Tủ Gương Nhà Tắm Tích Hợp Đèn', 3, 9000000, 4.3, 'tu_guong_tam.png', N'Tủ gương nhà tắm có tích hợp đèn LED', 'L05'),
+    ('SP037', N'Bàn Console Cổ Điển', 4, 5500000, 4.2, 'ban_console.png', N'Bàn console phong cách cổ điển', 'L03'),
+    ('SP038', N'Tủ Giày Đa Năng Gỗ Sồi', 3, 8000000, 4.4, 'tu_giay_soi.png', N'Tủ giày đa năng làm từ gỗ sồi', 'L05'),
+    ('SP039', N'Bàn Gỗ Mặt Kính Cao Cấp', 2, 11500000, 4.7, 'ban_go_kinh.png', N'Bàn gỗ kết hợp mặt kính hiện đại', 'L03'),
+    ('SP040', N'Đèn Treo Tường Đồng Vintage', 1, 4000000, 4.3, 'den_treo_dong.png', N'Đèn treo tường làm từ đồng phong cách vintage', 'L04');
 		
 
 go
@@ -368,26 +371,175 @@ INSERT INTO QL_PhanQuyen (MaNhomNguoiDung, MaManHinh, CoQuyen) VALUES
     ('MN004', 'MMH004', 1), -- Quản lý kho có quyền truy cập màn hình 4
     ('MN005', 'MMH005', 0); -- Nhà cung cấp không có quyền truy cập màn hình 5
 
+CREATE TRIGGER trg_UpdateTotalAmount
+ON chi_tiet_hoa_don
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    -- Cập nhật tổng tiền cho các hóa đơn bị ảnh hưởng
+    UPDATE hoa_don
+    SET tong_tien = (
+        SELECT SUM(thanh_tien)
+        FROM chi_tiet_hoa_don
+        WHERE chi_tiet_hoa_don.id_hoa_don = hoa_don.id_hoa_don
+    )
+    WHERE hoa_don.id_hoa_don IN (
+        SELECT DISTINCT id_hoa_don
+        FROM inserted
+        UNION
+        SELECT DISTINCT id_hoa_don
+        FROM deleted
+    );
+END;
+CREATE TRIGGER trg_UpdateProductRating
+ON danh_gia
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    -- Cập nhật điểm trung bình (làm tròn) vào bảng sản phẩm
+    UPDATE san_pham
+    SET diem = (
+        SELECT ROUND(AVG(CAST(diem AS FLOAT)), 1) -- Tính trung bình và làm tròn đến số nguyên
+        FROM danh_gia
+        WHERE danh_gia.id_san_pham = san_pham.id_san_pham
+    )
+    WHERE san_pham.id_san_pham IN (
+        SELECT DISTINCT id_san_pham FROM inserted
+        UNION
+        SELECT DISTINCT id_san_pham FROM deleted
+    );
+END;
 
+CREATE TRIGGER trg_UpdateTotalAmount
+ON chi_tiet_hoa_don
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    -- Cập nhật tổng tiền cho các hóa đơn bị ảnh hưởng
+    UPDATE hoa_don
+    SET tong_tien = (
+        SELECT SUM(thanh_tien)
+        FROM chi_tiet_hoa_don
+        WHERE chi_tiet_hoa_don.id_hoa_don = hoa_don.id_hoa_don
+    )
+    WHERE hoa_don.id_hoa_don IN (
+        SELECT DISTINCT id_hoa_don
+        FROM inserted
+        UNION
+        SELECT DISTINCT id_hoa_don
+        FROM deleted
+    );
+END;
+CREATE TRIGGER trg_UpdateProductRating
+ON danh_gia
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    -- Cập nhật điểm trung bình (làm tròn) vào bảng sản phẩm
+    UPDATE san_pham
+    SET diem = (
+        SELECT ROUND(AVG(CAST(diem AS FLOAT)), 0) -- Tính trung bình và làm tròn đến số nguyên
+        FROM danh_gia
+        WHERE danh_gia.id_san_pham = san_pham.id_san_pham
+    )
+    WHERE san_pham.id_san_pham IN (
+        SELECT DISTINCT id_san_pham FROM inserted
+        UNION
+        SELECT DISTINCT id_san_pham FROM deleted
+    );
+END;
 
+-- Trigger cập nhật số lượng tồn của sản phẩm khi thêm mới vào chi tiết phiếu nhập
+CREATE TRIGGER trg_capnhat_soluong_ton_sau_insert
+ON chi_tiet_phieu_nhap
+AFTER INSERT
+AS
+BEGIN
+    UPDATE san_pham
+    SET so_luong_ton = so_luong_ton + inserted.so_luong
+    FROM san_pham
+    INNER JOIN inserted ON san_pham.id_san_pham = inserted.id_san_pham;
+END;
 
-	ALTER DATABASE QuanLyBanHang SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-	DROP DATABASE QuanLyBanHang;
+-- Trigger cập nhật số lượng tồn của sản phẩm khi xóa khỏi chi tiết phiếu nhập
+CREATE TRIGGER trg_capnhat_soluong_ton_sau_delete
+ON chi_tiet_phieu_nhap
+AFTER DELETE
+AS
+BEGIN
+    UPDATE san_pham
+    SET so_luong_ton = so_luong_ton - deleted.so_luong
+    FROM san_pham
+    INNER JOIN deleted ON san_pham.id_san_pham = deleted.id_san_pham;
+END;
+
+-- Trigger cập nhật số lượng tồn của sản phẩm khi sửa chi tiết phiếu nhập
+CREATE TRIGGER trg_capnhat_soluong_ton_sau_update
+ON chi_tiet_phieu_nhap
+AFTER UPDATE
+AS
+BEGIN
+    UPDATE san_pham
+    SET so_luong_ton = so_luong_ton - deleted.so_luong + inserted.so_luong
+    FROM san_pham
+    INNER JOIN deleted ON san_pham.id_san_pham = deleted.id_san_pham
+    INNER JOIN inserted ON san_pham.id_san_pham = inserted.id_san_pham;
+END;
+
+-- Trigger cập nhật số lượng tồn của sản phẩm khi thêm mới vào chi tiết hóa đơn
+CREATE TRIGGER trg_capnhat_soluong_ton_hoa_don_insert
+ON chi_tiet_hoa_don
+AFTER INSERT
+AS
+BEGIN
+    UPDATE san_pham
+    SET so_luong_ton = so_luong_ton - inserted.so_luong
+    FROM san_pham
+    INNER JOIN inserted ON san_pham.id_san_pham = inserted.id_san_pham;
+END;
+
+-- Trigger cập nhật số lượng tồn của sản phẩm khi xóa khỏi chi tiết hóa đơn
+CREATE TRIGGER trg_capnhat_soluong_ton_hoa_don_delete
+ON chi_tiet_hoa_don
+AFTER DELETE
+AS
+BEGIN
+    UPDATE san_pham
+    SET so_luong_ton = so_luong_ton + deleted.so_luong
+    FROM san_pham
+    INNER JOIN deleted ON san_pham.id_san_pham = deleted.id_san_pham;
+END;
+
+-- Trigger cập nhật số lượng tồn của sản phẩm khi sửa chi tiết hóa đơn
+CREATE TRIGGER trg_capnhat_soluong_ton_hoa_don_update
+ON chi_tiet_hoa_don
+AFTER UPDATE
+AS
+BEGIN
+    UPDATE san_pham
+    SET so_luong_ton = so_luong_ton + deleted.so_luong - inserted.so_luong
+    FROM san_pham
+    INNER JOIN deleted ON san_pham.id_san_pham = deleted.id_san_pham
+    INNER JOIN inserted ON san_pham.id_san_pham = inserted.id_san_pham;
+END;
+
+--	ALTER DATABASE QuanLyBanHang SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+--	DROP DATABASE QuanLyBanHang;
 	-- Xóa các bảng con có khóa ngoại trước
-DROP TABLE IF EXISTS QL_PhanQuyen;
-DROP TABLE IF EXISTS QL_NguoiDungNhomNguoiDung;
-DROP TABLE IF EXISTS chi_tiet_hoa_don;
-DROP TABLE IF EXISTS danh_gia;
-DROP TABLE IF EXISTS phan_hoi;
-DROP TABLE IF EXISTS khuyen_mai;
-DROP TABLE IF EXISTS hoa_don;
+--DROP TABLE IF EXISTS QL_PhanQuyen;
+--DROP TABLE IF EXISTS QL_NguoiDungNhomNguoiDung;
+--DROP TABLE IF EXISTS chi_tiet_hoa_don;
+--DROP TABLE IF EXISTS danh_gia;
+--DROP TABLE IF EXISTS phan_hoi;
+--DROP TABLE IF EXISTS khuyen_mai;
+--DROP TABLE IF EXISTS hoa_don;
 
 -- Xóa các bảng chính không phụ thuộc
-DROP TABLE IF EXISTS nhan_vien;
-DROP TABLE IF EXISTS loai_nhan_vien;
-DROP TABLE IF EXISTS khach_hang;
-DROP TABLE IF EXISTS san_pham;
-DROP TABLE IF EXISTS loai_san_pham;
-DROP TABLE IF EXISTS DM_ManHinh;
-DROP TABLE IF EXISTS QL_NguoiDung;
-DROP TABLE IF EXISTS QL_NhomNguoiDung;
+--DROP TABLE IF EXISTS nhan_vien;
+--DROP TABLE IF EXISTS loai_nhan_vien;
+--DROP TABLE IF EXISTS khach_hang;
+--DROP TABLE IF EXISTS san_pham;
+--DROP TABLE IF EXISTS loai_san_pham;
+--DROP TABLE IF EXISTS DM_ManHinh;
+--DROP TABLE IF EXISTS QL_NguoiDung;
+--DROP TABLE IF EXISTS QL_NhomNguoiDung;

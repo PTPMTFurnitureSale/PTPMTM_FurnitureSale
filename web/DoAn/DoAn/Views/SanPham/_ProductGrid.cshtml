@@ -1,48 +1,17 @@
 ﻿@model DoAn.Models.ProductViewModel;
-
-<div class="product-list-page">
-    <div class="filters">
-        <h2>Tất cả sản phẩm</h2>
-
-        <!-- Bộ lọc sắp xếp -->
-        <div class="sorting">
-            <label for="sort">Sắp xếp:</label>
-            <select id="sort">
-                <option value="name-asc">Tên A → Z</option>
-                <option value="name-decs">Tên Z → A</option>
-            </select>
-        </div>
-
-        <!-- Bộ lọc loại sản phẩm -->
-        <h3>Loại</h3>
-        <div class="checkbox-group" id="product-type-filters">
-            @foreach (var type in Model.ProductTypes)
-            {
-                <label>
-                    <input type="checkbox" class="product-type-checkbox" value="@type.TenLoai"> @type.TenLoai
-                </label>
-            }
-            <a href="#" class="view-more">Xem thêm</a>
-        </div>
-
-        <!-- Bộ lọc theo mức giá -->
-        <h3>Mức giá</h3>
-        <div class="price-filter">
-            <label for="min-price">Giá từ: </label>
-            <input type="number" id="min-price" min="0" placeholder="Min" />
-            <label for="max-price">Giá đến: </label>
-            <input type="number" id="max-price" min="0" placeholder="Max" />
-        </div>
-
-        <!-- Nút Lọc -->
-        <button id="filter-btn" class="btn btn-primary">Lọc</button>
-    </div>
-
-    <!-- Khu vực hiển thị sản phẩm -->
-    <div class="product-grid" id="product-grid">
-        @foreach (var sp in Model.Products)
-        {
-            <div class="product-item" data-id="@sp.IdSanPham" data-price="@sp.DonGia" data-type="@sp.LoaiSanPham.TenLoai">
+<style>
+    nav{
+        display: block;
+        grid-column: span 4;
+    }
+</style>
+<!-- Khu vực hiển thị sản phẩm -->
+<div class="product-grid" id="product-list-container">
+    @foreach (var sp in Model.Products)
+    {
+        <div class="product-item" data-id="@sp.IdSanPham" data-price="@sp.DonGia" data-type="@sp.LoaiSanPham.TenLoai">
+            <!-- Link to product details -->
+            <a href="@Url.Action("Detail", "SanPham", new { id = sp.IdSanPham })">
                 <div class="product-image">
                     <img src="~/lib/@sp.Hinh" alt="@sp.TenSanPham" style="width: 200px; height: 200px;">
                 </div>
@@ -58,63 +27,80 @@
                     }
                 </div>
                 <div class="product-pricing">
-                    @if (sp.KhuyenMais.Any(km => km.IdSanPham == sp.IdSanPham))
+                    @if (Model.Promotions.Any(km => km.IdSanPham == sp.IdSanPham))
                     {
-                        var discount = sp.KhuyenMais.First(km => km.IdSanPham == sp.IdSanPham);
+                        var discount = Model.Promotions.First(km => km.IdSanPham == sp.IdSanPham);
                         var discountedPrice = sp.DonGia * (1 - (discount.PhanTramKhuyenMai / 100.0));
                         <span class="product-price">@discountedPrice.ToString("N0")₫</span>
                         <span class="product-original-price">@sp.DonGia.ToString("N0")₫</span>
-                        <span class="product-discount">-@discount.PhanTramKhuyenMai% Khuyến mãi</span>
+                        <span class="product-discount">-@discount.PhanTramKhuyenMai% </span>
                     }
                     else
                     {
                         <span class="product-price">@sp.DonGia.ToString("N0")₫</span>
                     }
                 </div>
-            </div>
-        }
-    </div>
+            </a>
+        </div>
+    }
+    <br />
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="javascript:void(0)" onclick="loadPage(1)">««</a>
+            </li>
+            <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="javascript:void(0)" onclick="loadPage(@(Model.CurrentPage - 1))">«</a>
+            </li>
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                    <a class="page-link" href="javascript:void(0)" onclick="loadPage(@i)">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="javascript:void(0)" onclick="loadPage(@(Model.CurrentPage + 1))">»</a>
+            </li>
+            <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="javascript:void(0)" onclick="loadPage(@Model.TotalPages)">»»</a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 
 <script>
     $(document).ready(function () {
         $('#filter-btn').click(function () {
+            // Lấy dữ liệu từ form
             var selectedTypes = [];
             var minPrice = $('#min-price').val();
             var maxPrice = $('#max-price').val();
             var sortOption = $('#sort').val();
 
-            // Lấy các loại sản phẩm đã chọn
+            // Lấy loại sản phẩm đã chọn
             $('#product-type-filters input:checked').each(function () {
                 selectedTypes.push($(this).val());
             });
 
-            // Lọc các sản phẩm
+            // Lọc các sản phẩm trong `product-grid`
             $('#product-grid .product-item').each(function () {
                 var productType = $(this).data('type');
-                var productPrice = $(this).data('price');
+                var productPrice = parseFloat($(this).data('price')); // Đảm bảo là số
 
-                // Kiểm tra loại sản phẩm
+                // Điều kiện lọc
                 var matchesType = selectedTypes.length === 0 || selectedTypes.includes(productType);
+                var matchesPrice = (!minPrice || productPrice >= parseFloat(minPrice)) &&
+                    (!maxPrice || productPrice <= parseFloat(maxPrice));
 
-                // Kiểm tra mức giá
-                var matchesPrice = true;
-                if (minPrice && productPrice < minPrice) {
-                    matchesPrice = false;
-                }
-                if (maxPrice && productPrice > maxPrice) {
-                    matchesPrice = false;
-                }
-
-                // Kiểm tra điều kiện lọc
                 if (matchesType && matchesPrice) {
-                    $(this).show();
+                    $(this).show(); // Hiển thị sản phẩm phù hợp
                 } else {
-                    $(this).hide();
+                    $(this).hide(); // Ẩn sản phẩm không phù hợp
                 }
             });
 
-            // Sắp xếp sản phẩm nếu có lựa chọn
+            // Sắp xếp sản phẩm
             if (sortOption === 'name-asc') {
                 sortProducts(true);
             } else if (sortOption === 'name-decs') {
@@ -122,22 +108,44 @@
             }
         });
 
-        // Hàm sắp xếp sản phẩm theo tên
+        // Hàm sắp xếp sản phẩm
         function sortProducts(ascending) {
             var products = $('#product-grid .product-item').toArray();
             products.sort(function (a, b) {
                 var nameA = $(a).find('.product-name').text().toLowerCase();
                 var nameB = $(b).find('.product-name').text().toLowerCase();
-                if (ascending) {
-                    return nameA.localeCompare(nameB);
-                } else {
-                    return nameB.localeCompare(nameA);
-                }
+                return ascending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
             });
 
-            // Đưa các sản phẩm đã sắp xếp vào lại grid
+            // Thay thế các sản phẩm đã sắp xếp vào `product-grid`
             $('#product-grid').html(products);
         }
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Gắn sự kiện input cho thanh tìm kiếm
+        $('.search-bar input').on('input', function () {
+            var keyword = $(this).val();
+            console.log("Tìm kiếm từ khóa:", keyword);
+
+            // Gửi AJAX tìm kiếm
+            $.ajax({
+                url: '/SanPham/SearchAjax',  // Đảm bảo đường dẫn chính xác
+                type: 'GET',
+                data: { keyword: keyword, page: 1 },  // Thêm tham số page = 1 để bắt đầu từ trang đầu tiên
+                success: function (response) {
+                    console.log("Kết quả tìm kiếm:", response);
+                    // Cập nhật lại danh sách sản phẩm và phân trang
+                    $('#product-list-container').html($(response).find('#product-list-container').html());
+                    $('.pagination').html($(response).find('.pagination').html());
+                },
+                error: function () {
+                    console.error("Lỗi khi tìm kiếm sản phẩm.");
+                }
+            });
+        });
     });
 </script>
 

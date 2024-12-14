@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics;
 
 namespace DoAn.Controllers
 {
@@ -123,16 +124,41 @@ namespace DoAn.Controllers
         public async Task<IActionResult> Profile()
         {
             var userName = User.Identity.Name; // Lấy tên người dùng từ Claims sau khi đăng nhập
+
+            // Lấy thông tin khách hàng từ bảng KhachHangs
             var khachHang = await _context.KhachHangs
                 .FirstOrDefaultAsync(k => k.TaiKhoan == userName);
 
             if (khachHang == null)
             {
-                return RedirectToAction("Login"); // Chuyển hướng về trang đăng nhập nếu người dùng chưa đăng nhập
+                return RedirectToAction("Login"); // Chuyển hướng về trang đăng nhập nếu không tìm thấy khách hàng
             }
+
+            // Lọc hóa đơn của khách hàng từ bảng HoaDons
+            var orders = await _context.HoaDons
+                .Where(h => h.IdKhachHang == khachHang.IdKhachHang)  // Lọc theo IdKhachHang
+                .Include(h => h.ChiTietHoaDons) // Nạp chi tiết hóa đơn
+                .ThenInclude(ct => ct.SanPham) // Nạp sản phẩm trong chi tiết hóa đơn
+                .ToListAsync();
+
+            // Kiểm tra và chuyển kiểu dữ liệu nếu cần
+            foreach (var order in orders)
+            {
+                // Chuyển TongTien từ kiểu floatsang float hoặc decimal
+                order.TongTien = (double)order.TongTien;  // Sử dụng Convert.ToSingle() nếu muốn sử dụng float
+
+                // In giá trị để kiểm tra
+                Debug.WriteLine($"Order ID: {order.IdHoaDon}, Total Amount: {order.TongTien}");
+            }
+
+            // Truyền danh sách hóa đơn vào ViewBag
+            ViewBag.Orders = orders;
 
             return View(khachHang); // Trả về view và hiển thị thông tin tài khoản của người dùng
         }
+
+
+
         // Đổi mật khẩu
         [HttpPost]
         [Authorize]

@@ -1,8 +1,7 @@
 ﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
-<meta name="csrf-token" content="@Html.AntiForgeryToken()" />
+<meta name="csrf-token" content="@Html.AntiForgeryToken()
 
 @model DoAn.Models.ProductDetailViewModel
-@ViewData["Title"] = "Trang Sản Phẩm";
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
     .product-detail-page {
@@ -559,11 +558,6 @@
 }
 </style>
 <div class="product-detail-page">
-    <div class="breadcrumb">
-        <a href="/">Trang chủ</a> /
-        <a href="#">Sản phẩm nổi bật</a> /
-        <span>@Model.Product.TenSanPham</span>
-    </div>
 
     <div class="product-content">
         <div class="product-images">
@@ -571,7 +565,7 @@
                 <img src="@Url.Content($"~/lib/{Model.Product.Hinh}")" alt="@Model.Product.TenSanPham" />
             </div>
         </div>
-
+        
         <div class="product-info">
             <h1>@Model.Product.TenSanPham</h1>
             <div class="product-details">
@@ -580,26 +574,29 @@
 
                 <!-- Hiển thị đánh giá trung bình -->
                 <div class="rating">
-                    @{
-                        var averageRating = Model.Reviews.Any() ? Model.Reviews.Average(r => r.SanPham.Diem) : 0;
-                    }
+                    
                     @for (var i = 0; i < 5; i++)
                     {
-                        <i class="fas fa-star @(i < averageRating ? "checked" : "")"></i>
+                        <i class="fas fa-star @(i < Model.Product.Diem ? "checked" : "")"></i>
                     }
                 </div>
 
                 <!-- Hiển thị giá và khuyến mãi -->
                 <div class="price">
-                    <span class="current-price">@Model.DiscountPrice.ToString("C")</span>
-                    @if (Model.Promotions.Any())
-                    {
-                        <span class="original-price">@Model.Product.DonGia.ToString("C")</span>
-                        <span class="discount">-@Model.Promotions.First().PhanTramKhuyenMai%</span>
+                    @{
+                        var discountPrice = @Model.Product.DonGia - (@Model.Product.DonGia * @Model.Promotions.First().PhanTramKhuyenMai / 100);
+                        <span class="current-price">@discountPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
+                        @if (Model.Promotions.Any())
+                        {
+
+                            <span class="original-price">@Model.Product.DonGia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
+                            <span class="discount">-@Model.Promotions.First().PhanTramKhuyenMai%</span>
+                        }
                     }
+                    
                 </div>
 
-                <p class="savings">(Tiết kiệm @(((decimal)Model.Product.DonGia - Model.DiscountPrice).ToString("C")))</p>
+                <p class="savings">(Tiết kiệm @(((float)Model.Product.DonGia - @discountPrice).ToString("C", new System.Globalization.CultureInfo("vi-VN"))))</p>
             </div>
 
             <!-- Khuyến mãi ưu đãi -->
@@ -613,9 +610,12 @@
 
             <!-- Số lượng -->
             <div class="quantity">
+
                 <label for="quantity">Số lượng:</label>
-                <input type="number" id="quantity" value="1" min="1" />
+
+                <input type="number" id="quantity" value="1" min="1" max="@Model.Product.SoLuongTon" oninput="checkQuantity()" />
             </div>
+
 
             <div class="action-buttons">
                 <button class="btn-add-to-cart" data-product-id="@Model.Product.IdSanPham" data-quantity="1">Thêm vào giỏ hàng</button>
@@ -701,6 +701,33 @@
         <button class="submit-review-btn" onclick="openReviewForm()">Gửi đánh giá của bạn</button>
 
     </div>
+    <div class="promo-section">
+        <div class="promo-text">
+            <h2>GỢI Ý CHO BẠN</h2>
+        </div>
+    </div>
+    <div class="product-grid">
+        @if (Model.NewArrivals != null && Model.NewArrivals.Any())
+        {
+            @foreach (var product in Model.NewArrivals)
+            {
+                <a href="~/SanPham/Detail/@product.IdSanPham" class="product-item">
+                    <div class="product-image">
+                        <img src="~/lib/@product.Hinh" alt="@product.TenSanPham">
+                    </div>
+                    <div class="product-name">@product.TenSanPham</div>
+                    <div class="product-pricing">
+                        <span class="product-price">@product.DonGia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
+                    </div>
+                </a>
+            }
+        }
+        else
+        {
+            <p>No recommended products available.</p>
+        }
+    </div>
+
 
 </div>
 <script>
@@ -774,6 +801,39 @@
     }
 </script>
 
+<script>
+    function checkQuantity() {
+        const quantityInput = document.getElementById("quantity");
+        const increaseBtn = document.getElementById("increase-btn");
+        const maxQuantity = parseInt(quantityInput.getAttribute("max"), 10);
+
+        if (parseInt(quantityInput.value, 10) >= maxQuantity) {
+            increaseBtn.style.display = "none"; // Ẩn nút tăng
+        } else {
+            increaseBtn.style.display = "inline-block"; // Hiển thị nút tăng
+        }
+    }
+
+    function increaseQuantity() {
+        const quantityInput = document.getElementById("quantity");
+        const maxQuantity = parseInt(quantityInput.getAttribute("max"), 10);
+
+        if (parseInt(quantityInput.value, 10) < maxQuantity) {
+            quantityInput.value = parseInt(quantityInput.value, 10) + 1;
+        }
+        checkQuantity();
+    }
+
+    function decreaseQuantity() {
+        const quantityInput = document.getElementById("quantity");
+        const minQuantity = parseInt(quantityInput.getAttribute("min"), 10);
+
+        if (parseInt(quantityInput.value, 10) > minQuantity) {
+            quantityInput.value = parseInt(quantityInput.value, 10) - 1;
+        }
+        checkQuantity();
+    }
+</script>
 
 
 

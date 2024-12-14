@@ -414,11 +414,35 @@
                     <p class="item-price">@item.Price.ToString("N0")đ</p>
                     <div class="quantity">
                         <div class="quantity-input">
-                            <button type="button" class="btn-decrease" onclick="updateQuantity('@item.ProductId', -1)"><i class="fas fa-minus"></i></button>
-                            <input type="number" value="@item.Quantity" min="1" onchange="updateQuantity('@item.ProductId', this.value)">
-                            <button type="button" class="btn-increase" onclick="updateQuantity('@item.ProductId', 1)"><i class="fas fa-plus"></i></button>
+                            <button type="button"
+                                    class="btn-decrease"
+                                    data-decrease-id="@item.ProductId"
+                                    onclick="updateQuantity('@item.ProductId', -1)"
+                            @if (@item.Quantity <= 1)
+                            {
+                                <text>disabled</text>
+                            }>
+                <i class="fas fa-minus"></i>
+            </button>
+                            <input type="number"
+                                   value="@item.Quantity"
+                                   min="1"
+                                   max="@item.SLT"
+                                   data-product-id="@item.ProductId"
+                                   onchange="checkQuantityOnInput('@item.ProductId')">
+                            <button type="button"
+                                    class="btn-increase"
+                                    data-increase-id="@item.ProductId"
+                                    onclick="updateQuantity('@item.ProductId', 1)"
+                            @if (@item.Quantity >= @item.SLT)
+                            {
+                                <text>disabled</text>
+                            }>
+                <i class="fas fa-plus"></i>
+            </button>
                         </div>
                     </div>
+
                 </div>
             }
 
@@ -454,7 +478,7 @@
                 <input type="text" id="promo" placeholder="Chọn mã giảm giá">
             </div>
 
-            <button class="checkout-button">Thanh Toán</button>
+            <a href="@Url.Action("index", "Checkout")"><button class="checkout-button">Thanh Toán</button></a>
 
             <div class="payment-methods">
                 <img src="~/lib/visa.png" alt="Visa">
@@ -499,3 +523,48 @@
     });
 
 </script>
+<script>
+    function updateQuantity(productId, change) {
+        const quantityInput = document.querySelector(`input[data-product-id="${productId}"]`);
+        const decreaseBtn = document.querySelector(`button[data-decrease-id="${productId}"]`);
+        const increaseBtn = document.querySelector(`button[data-increase-id="${productId}"]`);
+        const maxQuantity = parseInt(quantityInput.getAttribute("max"), 10);
+        const minQuantity = parseInt(quantityInput.getAttribute("min"), 10);
+
+        let currentQuantity = parseInt(quantityInput.value, 10);
+
+        // Cập nhật số lượng
+        if (typeof change === "number") {
+            currentQuantity += change;
+        } else {
+            currentQuantity = parseInt(change, 10) || minQuantity;
+        }
+
+        // Đảm bảo số lượng trong giới hạn min và max
+        currentQuantity = Math.max(minQuantity, Math.min(maxQuantity, currentQuantity));
+
+        quantityInput.value = currentQuantity;
+
+        // Kiểm tra nút tăng/giảm
+        if (currentQuantity <= minQuantity) {
+            decreaseBtn.disabled = true;
+        } else {
+            decreaseBtn.disabled = false;
+        }
+
+        if (currentQuantity >= maxQuantity) {
+            increaseBtn.disabled = true;
+        } else {
+            increaseBtn.disabled = false;
+        }
+
+        // Gửi yêu cầu cập nhật số lượng lên server (nếu cần thiết)
+        console.log(`Updated quantity for product ${productId}: ${currentQuantity}`);
+    }
+
+    // Tự động kiểm tra khi người dùng nhập trực tiếp số lượng
+    function checkQuantityOnInput(productId) {
+        updateQuantity(productId, null);
+    }
+</script>
+

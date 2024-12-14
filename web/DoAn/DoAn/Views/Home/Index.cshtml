@@ -458,12 +458,12 @@
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                     </div>
                     <div class="product-pricing">
-                        <span class="product-price">@discountPrice.ToString("C")</span>
-                        <span class="product-original-price">@product.DonGia.ToString("C")</span>
+                        <span class="product-price">@discountPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
+                        <span class="product-original-price">@product.DonGia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
                         <span class="product-discount">-@promotion.PhanTramKhuyenMai%</span>
                     </div>
                     <div class="sales-progress">
-                        Đã bán: 40/100
+                        <span class="product-discount">Số lượng tồn @promotion.SanPham.SoLuongTon.ToString()</span>
                         <div class="progress">
                             <div class="progress-bar" style="width: 40%;"></div>
                         </div>
@@ -477,7 +477,7 @@
 
 <!-- View More Button -->
 <div class="view-more">
-    <a href="#">Xem thêm &gt;&gt;</a>
+    <a href="@Url.Action(" DanhSach", "SanPham" )">Xem thêm &gt;&gt;</a>
 </div>
 <!-- Certification Section -->
 <div class="certification-section">
@@ -511,7 +511,7 @@
         </div>
         <h2>PHÒNG NGỦ HẠNH PHÚC</h2>
         <p>Đắm mình trong chiếc giường trang trí với bộ khăn trải giường sang trọng, sự kết hợp giữa chất liệu vải xa hoa và đồ nội thất được sắp xếp hợp lý để tạo nên một thiên đường ngủ xa hoa. Lấy cảm hứng và biến nhạt nhẽo thành hạnh phúc.</p>
-        <a href="#">Xem thêm &gt;&gt;</a>
+        <a href="@Url.Action(" DanhSach", "SanPham" )">Xem thêm &gt;&gt;</a>
     </div>
 </div>
 <!-- Collection Section -->
@@ -526,7 +526,7 @@
             <div class="collection-info">
                 <div class="collection-title">BST Phòng Bếp</div>
                 <div class="collection-link">
-                    <a href="#">Xem chi tiết &gt;&gt;</a>
+                    <a href="@Url.Action("DanhSach", "SanPham")">Xem chi tiết &gt;&gt;</a>
                 </div>
             </div>
         </div>
@@ -539,7 +539,7 @@
             <div class="collection-info">
                 <div class="collection-title">BST Phòng Ngủ</div>
                 <div class="collection-link">
-                    <a href="#">Xem chi tiết &gt;&gt;</a>
+                    <a href="@Url.Action("DanhSach", "SanPham")">Xem chi tiết &gt;&gt;</a>
                 </div>
             </div>
         </div>
@@ -552,7 +552,7 @@
             <div class="collection-info">
                 <div class="collection-title">BST Phòng Khách</div>
                 <div class="collection-link">
-                    <a href="#">Xem chi tiết &gt;&gt;</a>
+                    <a href="@Url.Action("DanhSach", "SanPham")">Xem chi tiết &gt;&gt;</a>
                 </div>
             </div>
         </div>
@@ -579,10 +579,10 @@
                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
             </div>
             <div class="product-pricing">
-                <span class="product-price">@discountPrice.ToString("C")</span>
+                <span class="product-price">@discountPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
             </div>
             <div class="sales-progress">
-                Đã bán: 40/100
+                <span class="product-discount">Số lượng tồn @product.SoLuongTon.ToString()</span>
                 <div class="progress">
                     <div class="progress-bar" style="width: 40%;"></div>
                 </div>
@@ -602,7 +602,7 @@
         <h3>Một chút câu chuyện</h3>
         <p>Với ước mơ tạo ra thứ gì đó đặc biệt, EGA Furniture đã thành lập vào năm 2010. Tầm nhìn không chỉ là tạo ra những sản phẩm mang lại niềm vui cho thế giới những người yêu thích thiết kế nội thất mà họ còn muốn tạo ra một nền văn hóa công ty nơi nhân viên cảm thấy thoải mái. Vì vậy, từ khóa hạnh phúc đã ăn sâu vào DNA thương hiệu của chúng tôi.</p>
         <p>Hạnh phúc là ở xung quanh bạn những người tốt và những sản phẩm mang lại niềm vui.</p>
-        <a href="#">Xem chi tiết &gt;&gt;</a>
+        <a href="@Url.Action("DanhSach", "SanPham")">Xem chi tiết &gt;&gt;</a>
     </div>
 </div>
 
@@ -626,10 +626,10 @@
                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
             </div>
             <div class="product-pricing">
-                <span class="product-price">@discountPrice.ToString("C")</span>
+                <span class="product-price">@discountPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
             </div>
             <div class="sales-progress">
-                Đã bán: 40/100
+                <span class="product-discount">Số lượng tồn @product.SoLuongTon.ToString()</span>
                 <div class="progress">
                     <div class="progress-bar" style="width: 40%;"></div>
                 </div>

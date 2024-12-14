@@ -15,6 +15,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/Account/Login"; // Đường dẫn tới trang đăng nhập
         options.LogoutPath = "/Account/Logout"; // Đường dẫn tới trang đăng xuất
     });
+builder.Services.AddScoped<RecommendationService>();
+builder.Services.AddSingleton<UserActivityService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -61,6 +63,9 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "Cart",
     pattern: "{controller=Cart}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "Checkout",
+    pattern: "{controller=Checkout}/{action=Index}/{id?}");
 
 
 app.Run();

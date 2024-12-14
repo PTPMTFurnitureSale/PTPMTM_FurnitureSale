@@ -21,6 +21,7 @@ namespace DoAn.Models
         public DbSet<QL_NhomNguoiDung> QL_NhomNguoiDungs { get; set; }
         public DbSet<QL_NguoiDungNhomNguoiDung> QL_NguoiDungNhomNguoiDungs { get; set; }
         public DbSet<QL_PhanQuyen> QL_PhanQuyens { get; set; }
+        public DbSet<UserActivity> UserActivities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
