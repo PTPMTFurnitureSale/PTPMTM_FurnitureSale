@@ -1,0 +1,10 @@
+D:\FurnitureSale\BLL\bin\Debug\BLL.dll
+D:\FurnitureSale\BLL\bin\Debug\BLL.pdb
+D:\FurnitureSale\BLL\bin\Debug\DAL.dll
+D:\FurnitureSale\BLL\bin\Debug\DTO.dll
+D:\FurnitureSale\BLL\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
+D:\FurnitureSale\BLL\bin\Debug\DAL.pdb
+D:\FurnitureSale\BLL\bin\Debug\DTO.pdb
+D:\FurnitureSale\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+D:\FurnitureSale\BLL\obj\Debug\BLL.dll
+D:\FurnitureSale\BLL\obj\Debug\BLL.pdb

@@ -1,0 +1,6 @@
+D:\FurnitureSale\DTO\bin\Debug\DTO.dll
+D:\FurnitureSale\DTO\bin\Debug\DTO.pdb
+D:\FurnitureSale\DTO\obj\Debug\DTO.dll
+D:\FurnitureSale\DTO\obj\Debug\DTO.pdb
+D:\FurnitureSale\DTO\bin\Debug\DTO.dll.config
+D:\FurnitureSale\DTO\obj\Debug\DTO.csprojResolveAssemblyReference.cache

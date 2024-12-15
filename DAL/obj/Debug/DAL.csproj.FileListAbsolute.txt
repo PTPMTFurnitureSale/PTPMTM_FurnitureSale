@@ -1,0 +1,7 @@
+D:\FurnitureSale\DAL\bin\Debug\DAL.dll
+D:\FurnitureSale\DAL\bin\Debug\DAL.pdb
+D:\FurnitureSale\DAL\obj\Debug\DAL.dll
+D:\FurnitureSale\DAL\obj\Debug\DAL.pdb
+D:\FurnitureSale\DAL\bin\Debug\DTO.dll
+D:\FurnitureSale\DAL\bin\Debug\DTO.pdb
+D:\FurnitureSale\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
