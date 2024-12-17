@@ -414,32 +414,9 @@
                     <p class="item-price">@item.Price.ToString("N0")đ</p>
                     <div class="quantity">
                         <div class="quantity-input">
-                            <button type="button"
-                                    class="btn-decrease"
-                                    data-decrease-id="@item.ProductId"
-                                    onclick="updateQuantity('@item.ProductId', -1)"
-                            @if (@item.Quantity <= 1)
-                            {
-                                <text>disabled</text>
-                            }>
-                <i class="fas fa-minus"></i>
-            </button>
-                            <input type="number"
-                                   value="@item.Quantity"
-                                   min="1"
-                                   max="@item.SLT"
-                                   data-product-id="@item.ProductId"
-                                   onchange="checkQuantityOnInput('@item.ProductId')">
-                            <button type="button"
-                                    class="btn-increase"
-                                    data-increase-id="@item.ProductId"
-                                    onclick="updateQuantity('@item.ProductId', 1)"
-                            @if (@item.Quantity >= @item.SLT)
-                            {
-                                <text>disabled</text>
-                            }>
-                <i class="fas fa-plus"></i>
-            </button>
+                            <button type="button" class="btn-decrease" onclick="updateQuantity('@item.ProductId', -1)"><i class="fas fa-minus"></i></button>
+                            <input type="number" value="@item.Quantity" min="1" max="@item.SLT" onchange="updateQuantity('@item.ProductId', this.value)">
+                            <button type="button" class="btn-increase" onclick="updateQuantity('@item.ProductId', 1)"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
 
@@ -523,7 +500,7 @@
     });
 
 </script>
-<script>
+@* <script>
     function updateQuantity(productId, change) {
         const quantityInput = document.querySelector(`input[data-product-id="${productId}"]`);
         const decreaseBtn = document.querySelector(`button[data-decrease-id="${productId}"]`);
@@ -566,5 +543,5 @@
     function checkQuantityOnInput(productId) {
         updateQuantity(productId, null);
     }
-</script>
+</script> *@
 

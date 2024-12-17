@@ -17,6 +17,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 builder.Services.AddScoped<RecommendationService>();
 builder.Services.AddSingleton<UserActivityService>();
+builder.Services.AddScoped<KMeansRecommendationService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {

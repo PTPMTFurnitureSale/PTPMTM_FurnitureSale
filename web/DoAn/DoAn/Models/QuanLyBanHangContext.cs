@@ -10,6 +10,7 @@ namespace DoAn.Models
         public DbSet<LoaiNhanVien> LoaiNhanViens { get; set; }
         public DbSet<KhachHang> KhachHangs { get; set; }
         public DbSet<SanPham> SanPhams { get; set; }
+        public DbSet<SanPhamMuaKem> SanPhamMuaKems { get; set; }
         public DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
         public DbSet<HoaDon> HoaDons { get; set; }
         public DbSet<PhanHoi> PhanHois { get; set; }

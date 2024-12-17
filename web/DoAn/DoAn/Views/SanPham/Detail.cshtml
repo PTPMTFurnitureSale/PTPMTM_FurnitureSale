@@ -582,21 +582,28 @@
                 </div>
 
                 <!-- Hiển thị giá và khuyến mãi -->
-                <div class="price">
-                    @{
-                        var discountPrice = @Model.Product.DonGia - (@Model.Product.DonGia * @Model.Promotions.First().PhanTramKhuyenMai / 100);
-                        <span class="current-price">@discountPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
-                        @if (Model.Promotions.Any())
-                        {
-
-                            <span class="original-price">@Model.Product.DonGia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
-                            <span class="discount">-@Model.Promotions.First().PhanTramKhuyenMai%</span>
+                @if (@Model.Promotions.Count == 0)
+                {
+                    <span class="current-price">@Model.Product.DonGia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
+                }
+                else
+                {
+                    <div class="price">
+                        @{
+                            var discountPrice = @Model.Product.DonGia - (@Model.Product.DonGia * @Model.Promotions.First().PhanTramKhuyenMai / 100);
+                            <span class="current-price">@discountPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
+                            @if (Model.Promotions.Any())
+                            {
+                                <span class="original-price">@Model.Product.DonGia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
+                                <span class="discount">-@Model.Promotions.First().PhanTramKhuyenMai%</span>
+                            }
                         }
-                    }
-                    
-                </div>
 
-                <p class="savings">(Tiết kiệm @(((float)Model.Product.DonGia - @discountPrice).ToString("C", new System.Globalization.CultureInfo("vi-VN"))))</p>
+                    </div>
+
+                    <p class="savings">(Tiết kiệm @(((float)Model.Product.DonGia - @discountPrice).ToString("C", new System.Globalization.CultureInfo("vi-VN"))))</p>
+                }
+                
             </div>
 
             <!-- Khuyến mãi ưu đãi -->

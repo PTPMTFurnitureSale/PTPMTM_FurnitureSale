@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
     },
     {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib.rar",
+      "PackagePath": "staticwebassets\\lib.rar"
+    },
+    {
       "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban.png",
       "PackagePath": "staticwebassets\\lib\\ban.png"
     },
@@ -51,6 +55,10 @@
     {
       "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban_nhat.png",
       "PackagePath": "staticwebassets\\lib\\ban_nhat.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban_tra_go.png",
+      "PackagePath": "staticwebassets\\lib\\ban_tra_go.png"
     },
     {
       "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\brand_1.webp",
@@ -153,8 +161,8 @@
       "PackagePath": "staticwebassets\\lib\\lookbook_oneproduct_img.webp"
     },
     {
-      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\mochi_pouffe (2).png",
-      "PackagePath": "staticwebassets\\lib\\mochi_pouffe (2).png"
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\mochi_pouffe(2).png",
+      "PackagePath": "staticwebassets\\lib\\mochi_pouffe(2).png"
     },
     {
       "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\mochi_pouffe.png",
@@ -245,8 +253,16 @@
       "PackagePath": "staticwebassets\\lib\\tu_giay_lua.png"
     },
     {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_giay_marcell.png",
+      "PackagePath": "staticwebassets\\lib\\tu_giay_marcell.png"
+    },
+    {
       "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_giay_soi.png",
       "PackagePath": "staticwebassets\\lib\\tu_giay_soi.png"
+    },
+    {
+      "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_giay_vienna.png",
+      "PackagePath": "staticwebassets\\lib\\tu_giay_vienna.png"
     },
     {
       "Id": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_guong_tam.png",

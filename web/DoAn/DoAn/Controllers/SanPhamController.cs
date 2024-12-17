@@ -9,25 +9,29 @@ using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using Microsoft.ML;
 using Microsoft.ML.Trainers;
+using Microsoft.ML.Data;
 namespace DoAn.Controllers
 {
+
     public class SanPhamController : Controller
     {
+        private readonly KMeansRecommendationService _kmeansRecommendationService;
         private readonly QuanLyBanHangContext _context;
         private readonly RecommendationService _recommendationService;
         private readonly UserActivityService _userActivityService; // Thêm UserActivityService vào controller
-
+        private readonly MLContext _mlContext;
+        private readonly ITransformer _model;
         // Constructor Injection của các dịch vụ
         public SanPhamController(QuanLyBanHangContext context,
-                                  RecommendationService recommendationService,
-                                  UserActivityService userActivityService)
+                         RecommendationService recommendationService,
+                         UserActivityService userActivityService,
+                         KMeansRecommendationService kmeansRecommendationService)
         {
             _context = context;
             _recommendationService = recommendationService;
             _userActivityService = userActivityService;
+            _kmeansRecommendationService = kmeansRecommendationService;
         }
-
-        // GET: SanPham/Detail
         public IActionResult Detail(string id)
         {
             if (!User.Identity.IsAuthenticated)
@@ -52,38 +56,11 @@ namespace DoAn.Controllers
                 _userActivityService.AddUserActivity(userId, id, "view");
             }
 
-            // Gợi ý sản phẩm cùng thể loại
+            // Gọi dịch vụ để nhận danh sách sản phẩm mua kèm
+            var recommendedProductIds = _kmeansRecommendationService.RecommendProducts(id);
             var recommendedProducts = _context.SanPhams
-                .Where(p => p.IdLoai == product.IdLoai && p.IdSanPham != product.IdSanPham) // Cùng thể loại, khác sản phẩm hiện tại
-                .Take(4)
+                .Where(p => recommendedProductIds.Contains(p.IdSanPham))
                 .ToList();
-
-            // Nếu không đủ, bổ sung sản phẩm gần giá
-            if (recommendedProducts.Count < 4)
-            {
-                // Lấy toàn bộ sản phẩm từ database và chuyển sang client-side
-                var additionalProducts = _context.SanPhams
-                    .AsEnumerable() // Chuyển toàn bộ dữ liệu sang bộ nhớ
-                    .Where(p => !recommendedProducts.Any(r => r.IdSanPham == p.IdSanPham) && p.IdSanPham != product.IdSanPham)
-                    .OrderBy(p => Math.Abs(p.DonGia - product.DonGia)) // Gần giá
-                    .Take(4 - recommendedProducts.Count)
-                    .ToList();
-
-                recommendedProducts.AddRange(additionalProducts);
-            }
-
-
-            // Nếu vẫn không đủ, bổ sung sản phẩm ngẫu nhiên
-            if (recommendedProducts.Count < 4)
-            {
-                var randomProducts = _context.SanPhams
-                    .Where(p => !recommendedProducts.Any(r => r.IdSanPham == p.IdSanPham) && p.IdSanPham != product.IdSanPham)
-                    .OrderBy(_ => Guid.NewGuid()) // Random sản phẩm
-                    .Take(4 - recommendedProducts.Count)
-                    .ToList();
-
-                recommendedProducts.AddRange(randomProducts);
-            }
 
             var viewModel = new ProductDetailViewModel
             {
@@ -91,42 +68,136 @@ namespace DoAn.Controllers
                 DiscountPrice = product.DonGia,
                 Promotions = _context.KhuyenMais.Where(k => k.IdSanPham == id).ToList(),
                 Reviews = _context.DanhGias.Include(r => r.KhachHang).Where(r => r.IdSanPham == id).ToList(),
-                NewArrivals = recommendedProducts.Distinct().Take(4).ToList() // Đảm bảo không trùng lặp, giới hạn 4 sản phẩm
+                NewArrivals = recommendedProducts
             };
 
             return View("~/Views/SanPham/Detail.cshtml", viewModel);
         }
 
+        // GET: SanPham/Detail
+        //    public IActionResult Detail(string id)
+        //    {
+        //        if (!User.Identity.IsAuthenticated)
+        //        {
+        //            return RedirectToAction("Login", "Account");
+        //        }
+
+        //        var product = _context.SanPhams
+        //            .Include(p => p.KhuyenMais)
+        //            .FirstOrDefault(p => p.IdSanPham == id);
+
+        //        if (product == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
+        //        // Ghi nhận hoạt động xem sản phẩm
+        //        if (userId != null)
+        //        {
+        //            _userActivityService.AddUserActivity(userId, id, "view");
+        //        }
+
+        //        // Gợi ý sản phẩm cùng thể loại
+        //        var recommendedProducts = _context.SanPhams
+        //            .Where(p => p.IdLoai == product.IdLoai && p.IdSanPham != product.IdSanPham) // Cùng thể loại, khác sản phẩm hiện tại
+        //            .Take(4)
+        //            .ToList();
+
+        //        // Nếu không đủ, bổ sung sản phẩm gần giá
+        //        if (recommendedProducts.Count < 4)
+        //        {
+        //            // Lấy toàn bộ sản phẩm từ database và chuyển sang client-side
+        //            var additionalProducts = _context.SanPhams
+        //                .AsEnumerable() // Chuyển toàn bộ dữ liệu sang bộ nhớ
+        //                .Where(p => !recommendedProducts.Any(r => r.IdSanPham == p.IdSanPham) && p.IdSanPham != product.IdSanPham)
+        //                .OrderBy(p => Math.Abs(p.DonGia - product.DonGia)) // Gần giá
+        //                .Take(4 - recommendedProducts.Count)
+        //                .ToList();
+
+        //            recommendedProducts.AddRange(additionalProducts);
+        //        }
 
 
-        // Lấy các sản phẩm gợi ý từ hoạt động của người dùng trong bộ nhớ
-        private List<SanPham> GetRecommendationsFromUserActivities(string userId, string currentProductId)
-        {
-            // Lấy danh sách các hoạt động của người dùng từ bộ nhớ
-            var userActivities = _userActivityService.GetUserActivities(userId);
+        //        // Nếu vẫn không đủ, bổ sung sản phẩm ngẫu nhiên
+        //        if (recommendedProducts.Count < 4)
+        //        {
+        //            var randomProducts = _context.SanPhams
+        //                .Where(p => !recommendedProducts.Any(r => r.IdSanPham == p.IdSanPham) && p.IdSanPham != product.IdSanPham)
+        //                .OrderBy(_ => Guid.NewGuid()) // Random sản phẩm
+        //                .Take(4 - recommendedProducts.Count)
+        //                .ToList();
+        //            recommendedProducts.AddRange(randomProducts);
+        //        }
 
-            // Nếu không có hoạt động nào, gợi ý các sản phẩm ngẫu nhiên hoặc phổ biến
-            if (userActivities == null || !userActivities.Any())
-            {
-                return _context.SanPhams.Take(4).ToList(); // Lấy 5 sản phẩm ngẫu nhiên
-            }
+        //        var viewModel = new ProductDetailViewModel
+        //        {
+        //            Product = product,
+        //            DiscountPrice = product.DonGia,
+        //            Promotions = _context.KhuyenMais.Where(k => k.IdSanPham == id).ToList(),
+        //            Reviews = _context.DanhGias.Include(r => r.KhachHang).Where(r => r.IdSanPham == id).ToList(),
+        //            NewArrivals = recommendedProducts.Distinct().Take(4).ToList() // Đảm bảo không trùng lặp, giới hạn 4 sản phẩm
+        //        };
 
-            // Lọc ra các sản phẩm mà người dùng đã xem (hoặc có thể mua, đánh giá)
-            var viewedProducts = userActivities
-                .Where(a => a.Action == "view" && a.ProductId != currentProductId)
-                .Select(a => a.ProductId)
-                .Distinct()
-                .ToList();
+        //        return View("~/Views/SanPham/Detail.cshtml", viewModel);
+        //    }
 
-            // Tìm các sản phẩm trong cơ sở dữ liệu có ID phù hợp với các sản phẩm đã xem
-            var recommendedProducts = _context.SanPhams
-                                              .Where(p => viewedProducts.Contains(p.IdSanPham))
-                                              .Take(4)  // Chỉ lấy tối đa 5 sản phẩm gợi ý
-                                              .ToList();
 
-            return recommendedProducts;
-        }
 
+        //    // Lấy các sản phẩm gợi ý từ hoạt động của người dùng trong bộ nhớ
+        //    public List<string> GetRecommendations(string productId)
+        //    {
+        //        // Đọc dữ liệu từ file CSV
+        //        IDataView dataView = _mlContext.Data.LoadFromTextFile<ProductPurchase>("", hasHeader: true, separatorChar: ',');
+
+        //        // Xây dựng pipeline huấn luyện
+        //        var pipeline = _mlContext.Transforms.Conversion.MapValueToKey("IdSanPham")
+        //            .Append(_mlContext.Transforms.Conversion.MapValueToKey("IdSanPhamKem"))
+        //            .Append(_mlContext.Recommendation().Trainers.MatrixFactorization(
+        //                new Microsoft.ML.Trainers.MatrixFactorizationTrainer.Options
+        //                {
+        //                    MatrixColumnIndexColumnName = "IdSanPham",
+        //                    MatrixRowIndexColumnName = "IdSanPhamKem",
+        //                    LabelColumnName = "Rating",
+        //                    NumberOfIterations = 20,
+        //                    ApproximationRank = 100
+        //                }))
+        //            .Append(_mlContext.Transforms.Conversion.MapKeyToValue("PredictedIdSanPhamKem", "IdSanPhamKem"));
+
+        //        // Huấn luyện mô hình
+        //        var model = pipeline.Fit(dataView);
+
+        //        // Tạo prediction engine
+        //        var predictionEngine = _mlContext.Model.CreatePredictionEngine<ProductPurchase, ProductPrediction>(model);
+
+        //        // Lấy danh sách sản phẩm
+        //        var allProducts = dataView.GetColumn<string>("IdSanPhamKem").Distinct().ToList();
+
+        //        var recommendations = new List<(string ProductId, float Score)>();
+
+        //        foreach (var otherProductId in allProducts)
+        //        {
+        //            if (otherProductId != productId) // Không tự gợi ý chính nó
+        //            {
+        //                var prediction = predictionEngine.Predict(new ProductPurchase
+        //                {
+        //                    IdSanPham = productId,
+        //                    IdSanPhamKem = otherProductId
+        //                });
+
+        //                recommendations.Add((otherProductId, prediction.Score));
+        //            }
+        //        }
+
+        //        // Sắp xếp theo điểm số giảm dần và trả về 4 sản phẩm gợi ý
+        //        return recommendations
+        //            .OrderByDescending(r => r.Score)
+        //            .Take(4)
+        //            .Select(r => r.ProductId)
+        //            .ToList();
+        //    }
+        //}
 
         // Hành động tìm kiếm (AJAX)
         // Hành động tìm kiếm (AJAX)

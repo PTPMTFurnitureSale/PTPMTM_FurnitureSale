@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MBa697HtyXrG8ckhYVCUax/R8z5pyxXA2qQTLizaqQI=",
+  "Hash": "vTSADbqZYO1smEPo+7C+TzBtUz/tbRtLGR+uvNTVbDQ=",
   "Source": "DoAn",
   "BasePath": "_content/DoAn",
   "Mode": "Default",
@@ -1290,6 +1290,25 @@
       "OriginalItemSpec": "wwwroot\\js\\bootstrap.min.js"
     },
     {
+      "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib.rar",
+      "SourceId": "DoAn",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\",
+      "BasePath": "_content/DoAn",
+      "RelativePath": "lib.rar",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib.rar"
+    },
+    {
       "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban.png",
       "SourceId": "DoAn",
       "SourceType": "Discovered",
@@ -1421,6 +1440,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\ban_nhat.png"
+    },
+    {
+      "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\ban_tra_go.png",
+      "SourceId": "DoAn",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\",
+      "BasePath": "_content/DoAn",
+      "RelativePath": "lib/ban_tra_go.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\ban_tra_go.png"
     },
     {
       "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\brand_1.webp",
@@ -1898,12 +1936,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\lookbook_oneproduct_img.webp"
     },
     {
-      "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\mochi_pouffe (2).png",
+      "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\mochi_pouffe(2).png",
       "SourceId": "DoAn",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\",
       "BasePath": "_content/DoAn",
-      "RelativePath": "lib/mochi_pouffe (2).png",
+      "RelativePath": "lib/mochi_pouffe(2).png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1914,7 +1952,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\lib\\mochi_pouffe (2).png"
+      "OriginalItemSpec": "wwwroot\\lib\\mochi_pouffe(2).png"
     },
     {
       "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\mochi_pouffe.png",
@@ -2354,6 +2392,25 @@
       "OriginalItemSpec": "wwwroot\\lib\\tu_giay_lua.png"
     },
     {
+      "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_giay_marcell.png",
+      "SourceId": "DoAn",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\",
+      "BasePath": "_content/DoAn",
+      "RelativePath": "lib/tu_giay_marcell.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\tu_giay_marcell.png"
+    },
+    {
       "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_giay_soi.png",
       "SourceId": "DoAn",
       "SourceType": "Discovered",
@@ -2371,6 +2428,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\tu_giay_soi.png"
+    },
+    {
+      "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_giay_vienna.png",
+      "SourceId": "DoAn",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\",
+      "BasePath": "_content/DoAn",
+      "RelativePath": "lib/tu_giay_vienna.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\tu_giay_vienna.png"
     },
     {
       "Identity": "C:\\Users\\Anhquan\\Downloads\\DoAn (1)\\DoAn\\New folder (2)\\DoAn\\DoAn\\wwwroot\\lib\\tu_guong_tam.png",
