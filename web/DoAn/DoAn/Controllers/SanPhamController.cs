@@ -6,36 +6,39 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-
+using System.Diagnostics;
+using Microsoft.ML;
+using Microsoft.ML.Trainers;
+using Microsoft.ML.Data;
 namespace DoAn.Controllers
 {
+
     public class SanPhamController : Controller
     {
+        private readonly KMeansRecommendationService _kmeansRecommendationService;
         private readonly QuanLyBanHangContext _context;
-
-        public SanPhamController(QuanLyBanHangContext context)
+        private readonly RecommendationService _recommendationService;
+        private readonly UserActivityService _userActivityService; // Thêm UserActivityService vào controller
+        private readonly MLContext _mlContext;
+        private readonly ITransformer _model;
+        // Constructor Injection của các dịch vụ
+        public SanPhamController(QuanLyBanHangContext context,
+                         RecommendationService recommendationService,
+                         UserActivityService userActivityService,
+                         KMeansRecommendationService kmeansRecommendationService)
         {
             _context = context;
+            _recommendationService = recommendationService;
+            _userActivityService = userActivityService;
+            _kmeansRecommendationService = kmeansRecommendationService;
         }
-
-        // GET: SanPham/DanhSach
-
         public IActionResult Detail(string id)
         {
-            if (User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
             {
-                // In thông tin các claim của người dùng để kiểm tra
-                foreach (var claim in User.Claims)
-                {
-                    Console.WriteLine($"{claim.Type}: {claim.Value}");
-                }
-            }
-            else
-            {
-                // Xử lý khi người dùng chưa đăng nhập
                 return RedirectToAction("Login", "Account");
             }
-            // Lấy thông tin sản phẩm từ ID
+
             var product = _context.SanPhams
                 .Include(p => p.KhuyenMais)
                 .FirstOrDefault(p => p.IdSanPham == id);
@@ -45,65 +48,188 @@ namespace DoAn.Controllers
                 return NotFound();
             }
 
-            // Lấy các đánh giá từ bảng phản hồi và bao gồm KhachHang
-            var reviews = _context.DanhGias
-                .Where(r => r.IdSanPham == id)
-                .Include(r => r.KhachHang)  // Ensure KhachHang is loaded
-                .Include(r => r.SanPham)    // Also load the associated SanPham if needed
-                .ToList();
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
-            // Lấy các chương trình khuyến mãi (nếu có)
-            var promotions = _context.KhuyenMais
-                .Where(k => k.IdSanPham == id && k.PhanTramKhuyenMai > 0)
-                .ToList();
-
-            // Tính giá giảm nếu có khuyến mãi
-            var discountPrice = product.DonGia;
-            if (promotions.Any())
+            // Ghi nhận hoạt động xem sản phẩm
+            if (userId != null)
             {
-                var promotion = promotions.First(); // Giả sử lấy chương trình khuyến mãi đầu tiên
-                discountPrice = product.DonGia - (product.DonGia * promotion.PhanTramKhuyenMai / 100);
+                _userActivityService.AddUserActivity(userId, id, "view");
             }
 
-            // Tạo view model
+            // Gọi dịch vụ để nhận danh sách sản phẩm mua kèm
+            var recommendedProductIds = _kmeansRecommendationService.RecommendProducts(id);
+            var recommendedProducts = _context.SanPhams
+                .Where(p => recommendedProductIds.Contains(p.IdSanPham))
+                .ToList();
+
             var viewModel = new ProductDetailViewModel
             {
                 Product = product,
-                DiscountPrice = (decimal)discountPrice,
-                Promotions = promotions,
-                Reviews = reviews
+                DiscountPrice = product.DonGia,
+                Promotions = _context.KhuyenMais.Where(k => k.IdSanPham == id).ToList(),
+                Reviews = _context.DanhGias.Include(r => r.KhachHang).Where(r => r.IdSanPham == id).ToList(),
+                NewArrivals = recommendedProducts
             };
 
             return View("~/Views/SanPham/Detail.cshtml", viewModel);
         }
-        [HttpPost]
-        public async Task<IActionResult> SearchAjax(string keyword, int page = 1)
+
+        // GET: SanPham/Detail
+        //    public IActionResult Detail(string id)
+        //    {
+        //        if (!User.Identity.IsAuthenticated)
+        //        {
+        //            return RedirectToAction("Login", "Account");
+        //        }
+
+        //        var product = _context.SanPhams
+        //            .Include(p => p.KhuyenMais)
+        //            .FirstOrDefault(p => p.IdSanPham == id);
+
+        //        if (product == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
+        //        // Ghi nhận hoạt động xem sản phẩm
+        //        if (userId != null)
+        //        {
+        //            _userActivityService.AddUserActivity(userId, id, "view");
+        //        }
+
+        //        // Gợi ý sản phẩm cùng thể loại
+        //        var recommendedProducts = _context.SanPhams
+        //            .Where(p => p.IdLoai == product.IdLoai && p.IdSanPham != product.IdSanPham) // Cùng thể loại, khác sản phẩm hiện tại
+        //            .Take(4)
+        //            .ToList();
+
+        //        // Nếu không đủ, bổ sung sản phẩm gần giá
+        //        if (recommendedProducts.Count < 4)
+        //        {
+        //            // Lấy toàn bộ sản phẩm từ database và chuyển sang client-side
+        //            var additionalProducts = _context.SanPhams
+        //                .AsEnumerable() // Chuyển toàn bộ dữ liệu sang bộ nhớ
+        //                .Where(p => !recommendedProducts.Any(r => r.IdSanPham == p.IdSanPham) && p.IdSanPham != product.IdSanPham)
+        //                .OrderBy(p => Math.Abs(p.DonGia - product.DonGia)) // Gần giá
+        //                .Take(4 - recommendedProducts.Count)
+        //                .ToList();
+
+        //            recommendedProducts.AddRange(additionalProducts);
+        //        }
+
+
+        //        // Nếu vẫn không đủ, bổ sung sản phẩm ngẫu nhiên
+        //        if (recommendedProducts.Count < 4)
+        //        {
+        //            var randomProducts = _context.SanPhams
+        //                .Where(p => !recommendedProducts.Any(r => r.IdSanPham == p.IdSanPham) && p.IdSanPham != product.IdSanPham)
+        //                .OrderBy(_ => Guid.NewGuid()) // Random sản phẩm
+        //                .Take(4 - recommendedProducts.Count)
+        //                .ToList();
+        //            recommendedProducts.AddRange(randomProducts);
+        //        }
+
+        //        var viewModel = new ProductDetailViewModel
+        //        {
+        //            Product = product,
+        //            DiscountPrice = product.DonGia,
+        //            Promotions = _context.KhuyenMais.Where(k => k.IdSanPham == id).ToList(),
+        //            Reviews = _context.DanhGias.Include(r => r.KhachHang).Where(r => r.IdSanPham == id).ToList(),
+        //            NewArrivals = recommendedProducts.Distinct().Take(4).ToList() // Đảm bảo không trùng lặp, giới hạn 4 sản phẩm
+        //        };
+
+        //        return View("~/Views/SanPham/Detail.cshtml", viewModel);
+        //    }
+
+
+
+        //    // Lấy các sản phẩm gợi ý từ hoạt động của người dùng trong bộ nhớ
+        //    public List<string> GetRecommendations(string productId)
+        //    {
+        //        // Đọc dữ liệu từ file CSV
+        //        IDataView dataView = _mlContext.Data.LoadFromTextFile<ProductPurchase>("", hasHeader: true, separatorChar: ',');
+
+        //        // Xây dựng pipeline huấn luyện
+        //        var pipeline = _mlContext.Transforms.Conversion.MapValueToKey("IdSanPham")
+        //            .Append(_mlContext.Transforms.Conversion.MapValueToKey("IdSanPhamKem"))
+        //            .Append(_mlContext.Recommendation().Trainers.MatrixFactorization(
+        //                new Microsoft.ML.Trainers.MatrixFactorizationTrainer.Options
+        //                {
+        //                    MatrixColumnIndexColumnName = "IdSanPham",
+        //                    MatrixRowIndexColumnName = "IdSanPhamKem",
+        //                    LabelColumnName = "Rating",
+        //                    NumberOfIterations = 20,
+        //                    ApproximationRank = 100
+        //                }))
+        //            .Append(_mlContext.Transforms.Conversion.MapKeyToValue("PredictedIdSanPhamKem", "IdSanPhamKem"));
+
+        //        // Huấn luyện mô hình
+        //        var model = pipeline.Fit(dataView);
+
+        //        // Tạo prediction engine
+        //        var predictionEngine = _mlContext.Model.CreatePredictionEngine<ProductPurchase, ProductPrediction>(model);
+
+        //        // Lấy danh sách sản phẩm
+        //        var allProducts = dataView.GetColumn<string>("IdSanPhamKem").Distinct().ToList();
+
+        //        var recommendations = new List<(string ProductId, float Score)>();
+
+        //        foreach (var otherProductId in allProducts)
+        //        {
+        //            if (otherProductId != productId) // Không tự gợi ý chính nó
+        //            {
+        //                var prediction = predictionEngine.Predict(new ProductPurchase
+        //                {
+        //                    IdSanPham = productId,
+        //                    IdSanPhamKem = otherProductId
+        //                });
+
+        //                recommendations.Add((otherProductId, prediction.Score));
+        //            }
+        //        }
+
+        //        // Sắp xếp theo điểm số giảm dần và trả về 4 sản phẩm gợi ý
+        //        return recommendations
+        //            .OrderByDescending(r => r.Score)
+        //            .Take(4)
+        //            .Select(r => r.ProductId)
+        //            .ToList();
+        //    }
+        //}
+
+        // Hành động tìm kiếm (AJAX)
+        // Hành động tìm kiếm (AJAX)
+        [HttpGet]
+        public async Task<IActionResult> Danhsach(string keyword, int page = 1)
         {
-            const int pageSize = 12; // Số sản phẩm trên mỗi trang
+            const int pageSize = 12;
 
-            if (string.IsNullOrEmpty(keyword))
-            {
-                return RedirectToAction("DanhSach", new { page }); // Nếu không có từ khóa, trả về trang danh sách đầy đủ
-            }
-
-            // Tìm sản phẩm có tên chứa từ khóa
+            // Query danh sách sản phẩm
             var productsQuery = _context.SanPhams
                 .Include(sp => sp.KhuyenMais)
-                .Where(p => p.TenSanPham.Contains(keyword));
+                .AsQueryable();
 
-            // Lấy tổng số sản phẩm phù hợp với từ khóa
+            // Lọc theo từ khóa nếu có
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                productsQuery = productsQuery.Where(p => p.TenSanPham.Contains(keyword));
+            }
+
+            // Tổng số sản phẩm
             var totalProducts = await productsQuery.CountAsync();
 
-            // Lấy sản phẩm cho trang hiện tại
+            // Lấy sản phẩm của trang hiện tại
             var products = await productsQuery
-                .Skip((page - 1) * pageSize) // Bỏ qua sản phẩm trước đó
-                .Take(pageSize) // Lấy sản phẩm cho trang hiện tại
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
 
             // Tính số trang
-            var totalPages = (int)Math.Ceiling(totalProducts / (double)pageSize);
+            var totalPages = (int)Math.Ceiling(totalProducts / (float)pageSize);
 
-            // Tạo view model
+            // Tạo ViewModel
             var model = new ProductViewModel
             {
                 Products = products,
@@ -113,7 +239,14 @@ namespace DoAn.Controllers
                 TotalPages = totalPages
             };
 
-            return View("DanhSach", model); // Trả về trang danh sách với kết quả tìm kiếm và phân trang
+            // Nếu yêu cầu là AJAX, trả về PartialView
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("_ProductGrid", model);
+            }
+
+            // Trả về View chính nếu không phải AJAX
+            return View(model);
         }
 
 
@@ -159,7 +292,7 @@ namespace DoAn.Controllers
             _context.DanhGias.Add(review);
             await _context.SaveChangesAsync();
 
-            return Json(new { success = true });
+            return RedirectToAction("Detail", "SanPham", new { id = productId });
         }
 
 
@@ -180,7 +313,7 @@ namespace DoAn.Controllers
                 .ToListAsync();
 
             // Tính số trang
-            var totalPages = (int)Math.Ceiling(totalProducts / (double)pageSize);
+            var totalPages = (int)Math.Ceiling(totalProducts / (float)pageSize);
 
             // Tạo view model
             var model = new ProductViewModel
@@ -195,25 +328,36 @@ namespace DoAn.Controllers
             return View(model);
         }
 
-
-        public IActionResult FilterProducts(List<string> types, decimal? minPrice, decimal? maxPrice, string sortOrder)
+        [HttpPost]
+        public IActionResult FilterProducts(List<string> types, double? minPrice, double? maxPrice, string sortOrder, int page = 1, int pageSize = 10)
         {
+            // Log các giá trị nhận được từ request
+            Debug.WriteLine("Types: " + (types != null ? string.Join(", ", types) : "null"));
+            Debug.WriteLine("Min Price: " + (minPrice.HasValue ? minPrice.Value.ToString() : "null"));
+            Debug.WriteLine("Max Price: " + (maxPrice.HasValue ? maxPrice.Value.ToString() : "null"));
+            Debug.WriteLine("Sort Order: " + sortOrder);
+            Debug.WriteLine("Page: " + page);
+            Debug.WriteLine("Page Size: " + pageSize);
+
             var query = _context.SanPhams.Include(sp => sp.KhuyenMais).AsQueryable();
 
             // Lọc theo loại sản phẩm
             if (types != null && types.Any())
             {
                 query = query.Where(sp => types.Contains(sp.LoaiSanPham.TenLoai));
+                Debug.WriteLine("Filter by types applied");
             }
 
             // Lọc theo mức giá
             if (minPrice.HasValue)
             {
-                query = query.Where(sp => sp.DonGia >= (double)minPrice.Value);
+                query = query.Where(sp => sp.DonGia >= (float)minPrice.Value);
+                Debug.WriteLine("Filter by minPrice applied");
             }
             if (maxPrice.HasValue)
             {
-                query = query.Where(sp => sp.DonGia <= (double)maxPrice.Value);
+                query = query.Where(sp => sp.DonGia <= (float)maxPrice.Value);
+                Debug.WriteLine("Filter by maxPrice applied");
             }
 
             // Sắp xếp sản phẩm
@@ -222,24 +366,35 @@ namespace DoAn.Controllers
                 if (sortOrder == "name-asc")
                 {
                     query = query.OrderBy(sp => sp.TenSanPham);
+                    Debug.WriteLine("Sorting by name ascending");
                 }
                 else if (sortOrder == "name-desc")
                 {
                     query = query.OrderByDescending(sp => sp.TenSanPham);
+                    Debug.WriteLine("Sorting by name descending");
                 }
             }
 
-            var products = query.ToList();
+            // Tổng số sản phẩm
+            var totalProducts = query.Count();
+
+            // Chia trang
+            var totalPages = (int)Math.Ceiling(totalProducts / (double)pageSize);
+            var products = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            Debug.WriteLine("Total products retrieved: " + products.Count);
 
             // Tạo view model và trả lại partial view
             var model = new ProductViewModel
             {
                 Products = products,
                 ProductTypes = _context.LoaiSanPhams.ToList(),
-                Promotions = _context.KhuyenMais.ToList()
+                Promotions = _context.KhuyenMais.ToList(),
+                CurrentPage = page,
+                TotalPages = totalPages
             };
 
-            return PartialView("_ProductGrid", model);  // Trả về toàn bộ model
+            return PartialView("_ProductGrid", model);
         }
 
         public async Task<IActionResult> Index()

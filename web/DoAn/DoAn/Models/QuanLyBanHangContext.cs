@@ -10,6 +10,7 @@ namespace DoAn.Models
         public DbSet<LoaiNhanVien> LoaiNhanViens { get; set; }
         public DbSet<KhachHang> KhachHangs { get; set; }
         public DbSet<SanPham> SanPhams { get; set; }
+        public DbSet<SanPhamMuaKem> SanPhamMuaKems { get; set; }
         public DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
         public DbSet<HoaDon> HoaDons { get; set; }
         public DbSet<PhanHoi> PhanHois { get; set; }
@@ -21,6 +22,7 @@ namespace DoAn.Models
         public DbSet<QL_NhomNguoiDung> QL_NhomNguoiDungs { get; set; }
         public DbSet<QL_NguoiDungNhomNguoiDung> QL_NguoiDungNhomNguoiDungs { get; set; }
         public DbSet<QL_PhanQuyen> QL_PhanQuyens { get; set; }
+        public DbSet<UserActivity> UserActivities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

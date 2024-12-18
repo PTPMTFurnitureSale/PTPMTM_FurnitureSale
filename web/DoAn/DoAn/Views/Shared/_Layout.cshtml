@@ -12,6 +12,12 @@
             text-decoration: none;
             color: black;
         }
+
+        .nav-link-list-page {
+            color: #564a4a;
+            font-size: 19px;
+            font-weight: 649;
+        }
         /* Header styles */
         .header {
             background-color: #f8f9fa;
@@ -113,30 +119,9 @@
             <!-- Navigation Section -->
             <nav class="d-flex align-items-center">
                 <ul class="nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="@Url.Action("DanhSach", "SanPham")" id="sanPhamDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sản phẩm
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="sanPhamDropdown">
-                            <li><a class="dropdown-item" href="@Url.Action("DanhSach", "SanPham")">Nội thất</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("DanhSach", "SanPham")">Đồ trang trí</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("DanhSach", "SanPham")">Vật dụng</a></li>
-                        </ul>
-                    </li>
-                    @* <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="phongDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Phòng
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="phongDropdown">
-                            <li><a class="dropdown-item" href="#">Phòng khách</a></li>
-                            <li><a class="dropdown-item" href="#">Phòng bếp</a></li>
-                        </ul>
-                    </li> *@
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Góc cảm hứng</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Hướng dẫn</a>
+                        <a class="nav-link nav-link-list-page" href="@Url.Action("DanhSach", "SanPham")" id="sanPhamDropdown" role="button">Danh sách sản phẩm</a>
                     </li>
                 </ul>
             </nav>
@@ -145,8 +130,9 @@
             <div class="d-flex align-items-center">
                 <div class="search-bar">
                     <input type="text" class="form-control" placeholder="Tìm kiếm...">
-                    <a href="@Url.Action("SearchAjax", "SanPham")"><button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button></a>
+                    <button class="btn btn-outline-secondary" id="search-btn"><i class="fas fa-search"></i></button>
                 </div>
+
                 <div class="icons">
                     <i class="fas fa-user dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                     <ul class="dropdown-menu" aria-labelledby="userDropdown">
@@ -224,27 +210,55 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.search-bar input').on('input', function () {
-                var keyword = $(this).val();
+   
 
-                $.ajax({
-                    url: '/SanPham/SearchAjax',
-                    type: 'GET',
-                    data: { keyword: keyword },
-                    success: function (response) {
-                        $('#search-results').html(response); // Cập nhật vùng kết quả
-                    },
-                    error: function () {
-                        console.error("Lỗi khi tải kết quả tìm kiếm.");
-                    }
-                });
-            });
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#search-btn').on('click', function () {
+            var keyword = $('.search-bar input').val().trim(); // Lấy từ khóa tìm kiếm từ input
+            console.log("Đã click");
+
+            // Chuyển hướng sang trang Danh sách sản phẩm
+            var redirectUrl = '/SanPham/Danhsach?keyword=' + encodeURIComponent(keyword);
+            window.location.href = redirectUrl; // Chuyển hướng trang
         });
 
-    </script>
-</body>
+        // Khi trang Danhsach đã load, tự động tìm kiếm nếu có từ khóa
+        var searchParams = new URLSearchParams(window.location.search); // Lấy tham số từ URL
+        var keyword = searchParams.get('keyword'); // Lấy từ khóa tìm kiếm
+        if (keyword) {
+            performSearch(keyword);
+        }
+
+        // Hàm thực hiện tìm kiếm AJAX
+        function performSearch(keyword) {
+            console.log("Tìm kiếm tự động với từ khóa:", keyword);
+            $.ajax({
+                url: '/SanPham/Danhsach',
+                type: 'GET',
+                data: { keyword: keyword, page: 1 }, // Từ khóa và trang
+                success: function (response) {
+                    console.log("Kết quả tìm kiếm:", response);
+
+                    // Cập nhật danh sách sản phẩm
+                    var productContainer = $('#product-list-container');
+                    
+                        productContainer.html($(response).find('#product-list-container').html());
+                    
+
+                    // Cập nhật phân trang
+                    $('.pagination').html($(response).find('.pagination').html());
+                },
+                error: function () {
+                    console.error("Lỗi khi tìm kiếm sản phẩm.");
+                }
+            });
+        }
+    });
+
+</script>
 </html>

@@ -75,8 +75,10 @@ namespace DoAn.Controllers
                     ProductId = productId,
                     ProductName = product.TenSanPham,
                     Image = product.Hinh,
-                    Price = (decimal)product.DonGia,
-                    Quantity = quantity
+                    Price = (float)product.DonGia,
+                    Quantity = quantity,
+                    SLT = product.SoLuongTon
+
                 });
             }
 
